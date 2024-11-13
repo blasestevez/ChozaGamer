@@ -32,10 +32,12 @@
             textBox1 = new TextBox();
             button1 = new Button();
             dataGridView1 = new DataGridView();
-            searchProductDTOBindingSource = new BindingSource(components);
             ProductImage = new DataGridViewImageColumn();
+            searchProductDTOBindingSource = new BindingSource(components);
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchProductDTOBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // textBox1
@@ -70,10 +72,6 @@
             dataGridView1.TabIndex = 4;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // searchProductDTOBindingSource
-            // 
-            searchProductDTOBindingSource.DataSource = typeof(DataAccess.Models.DTOs.SearchProductDTO);
-            // 
             // ProductImage
             // 
             ProductImage.HeaderText = "Product Preview";
@@ -82,11 +80,26 @@
             ProductImage.ReadOnly = true;
             ProductImage.Resizable = DataGridViewTriState.False;
             // 
+            // searchProductDTOBindingSource
+            // 
+            searchProductDTOBindingSource.DataSource = typeof(DataAccess.Models.DTOs.SearchProductDTO);
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(997, 23);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(156, 126);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1264, 681);
+            Controls.Add(pictureBox1);
             Controls.Add(dataGridView1);
             Controls.Add(button1);
             Controls.Add(textBox1);
@@ -95,6 +108,7 @@
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchProductDTOBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -105,5 +119,6 @@
         private DataGridView dataGridView1;
         private BindingSource searchProductDTOBindingSource;
         private DataGridViewImageColumn ProductImage;
+        private PictureBox pictureBox1;
     }
 }

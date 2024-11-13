@@ -1,4 +1,5 @@
 using ChozaGamer.Business.Services;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace ChozaGamer.Presentation
 {
@@ -25,7 +26,7 @@ namespace ChozaGamer.Presentation
             imgColumn.Name = "ProductImage";
             imgColumn.HeaderText = "Preview";
             imgColumn.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            
+
             dataGridView1.Columns.Add(imgColumn);
             dataGridView1.Columns.Add("ProductName", "Name");
             dataGridView1.Columns.Add("CategoryName", "Category");
@@ -80,6 +81,8 @@ namespace ChozaGamer.Presentation
                 row.Cells["Sale"].Value = product.sale;
                 row.Cells["Warranty"].Value = product.warranty;
                 row.Cells["IVA"].Value = product.iva;
+
+                pictureBox1.Image = ConvertImage();
             }
         }
 
@@ -92,5 +95,21 @@ namespace ChozaGamer.Presentation
         {
 
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private Image ConvertImage()
+        {
+            using (MemoryStream ms = new MemoryStream(File.ReadAllBytes(@"C: \Users\tig2\Desktop\GPvDyB7XEAA3D3j.jfif")))
+            {
+                Image img = Image.FromStream(ms);
+                return img;
+            }
+        }
+
+        
     }
 }
