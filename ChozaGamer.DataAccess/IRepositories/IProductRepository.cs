@@ -1,4 +1,5 @@
 ﻿using ChozaGamer.DataAccess.Models.Domain;
+using ChozaGamer.DataAccess.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,8 @@ namespace ChozaGamer.DataAccess.IRepositories
 {
     public interface IProductRepository
     {
-        Task<List<Product>> GetProductsAsync(string search);
-        Task<List<Product>> GetProductsByCategoryAsync(string search, int idCategory);
-        Task<List<Product>> GetProductsBySubCategoryAsync(string search, int idSubCategory);
+        Task<List<SearchProductDTO>> GetProductsAsync(string search);
+        Task<List<SearchProductDTO>> GetProductsByCategoryAsync(string search, int idCategory);
+        Task<List<SearchProductDTO>> GetProductsBySubCategoryAsync(string search, int idSubCategory);
     }
 }

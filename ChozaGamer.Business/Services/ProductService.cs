@@ -1,4 +1,5 @@
 ﻿using ChozaGamer.DataAccess.Models.Domain;
+using ChozaGamer.DataAccess.Models.DTOs;
 using ChozaGamer.DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
@@ -16,19 +17,19 @@ namespace ChozaGamer.Business.Services
         {
             this.repository = repository;
         }
-        public async Task<List<Product>> GetProducts(string search)
+        public async Task<List<SearchProductDTO>> GetProducts(string search)
         {
             var response = await repository.GetProductsAsync(search);
             return response;
         }
 
-        public async Task<List<Product>> GetProductsByCategory(string search, int idCategory)
+        public async Task<List<SearchProductDTO>> GetProductsByCategory(string search, int idCategory)
         {
             var response = await repository.GetProductsByCategoryAsync(search, idCategory);
             return response;
         }
 
-        public async Task<List<Product>> GetProductsBySubCategory(string search, int idSubCategory)
+        public async Task<List<SearchProductDTO>> GetProductsBySubCategory(string search, int idSubCategory)
         {
             var response = await repository.GetProductsBySubCategoryAsync(search, idSubCategory);
             return response;

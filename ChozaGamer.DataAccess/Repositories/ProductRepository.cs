@@ -1,5 +1,7 @@
-﻿using ChozaGamer.DataAccess.IRepositories;
+﻿using AutoMapper;
+using ChozaGamer.DataAccess.IRepositories;
 using ChozaGamer.DataAccess.Models.Domain;
+using ChozaGamer.DataAccess.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,28 +14,47 @@ namespace ChozaGamer.DataAccess.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly ApplicationDbContext dbContext;
+        private readonly IMapper mapper;
 
-        public ProductRepository(ApplicationDbContext dbContext)
+        public ProductRepository(ApplicationDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
-        public async Task<List<Product>> GetProductsAsync(string search)
+        public async Task<List<SearchProductDTO>> GetProductsAsync(string search)
         {
-            return await dbContext.Products.Where(x => x.name.Contains(search))
+            var products = await dbContext.Products.Where(x => x.name.Contains(search))
+                .Include(p => p.ProductImages)
                 .Include(p => p.Category)
                 .Include(p => p.Brand)
                 .Include(p => p.SubCategory)
                 .ToListAsync();
+
+            return mapper.Map<List<SearchProductDTO>>(products);
         }
 
-        public async Task<List<Product>> GetProductsByCategoryAsync(string search, int idCategory)
+        public async Task<List<SearchProductDTO>> GetProductsByCategoryAsync(string search, int idCategory)
         {
-            return await dbContext.Products.Where(x => x.idCategory == idCategory && x.name.Contains(search)).ToListAsync();
+            var products = await dbContext.Products.Where(x => x.idCategory == idCategory && x.name.Contains(search))
+                .Include(p => p.ProductImages)
+                .Include(p => p.Category)
+                .Include(p => p.Brand)
+                .Include(p => p.SubCategory)
+                .ToListAsync();
+
+            return mapper.Map<List<SearchProductDTO>>(products);
         }
 
-        public async Task<List<Product>> GetProductsBySubCategoryAsync(string search, int idSubCategory)
+        public async Task<List<SearchProductDTO>> GetProductsBySubCategoryAsync(string search, int idSubCategory)
         {
-            return await dbContext.Products.Where(x => x.idSubCategory == idSubCategory && x.name.Contains(search)).ToListAsync();
+            var products = await dbContext.Products.Where(x => x.idSubCategory == idSubCategory && x.name.Contains(search))
+                .Include(p => p.ProductImages)
+                .Include(p => p.Category)
+                .Include(p => p.Brand)
+                .Include(p => p.SubCategory)
+                .ToListAsync();
+
+            return mapper.Map<List<SearchProductDTO>>(products);
         }
     }
 }

@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             textBox1 = new TextBox();
             button1 = new Button();
             dataGridView1 = new DataGridView();
+            searchProductDTOBindingSource = new BindingSource(components);
+            ProductImage = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchProductDTOBindingSource).BeginInit();
             SuspendLayout();
             // 
             // textBox1
@@ -40,6 +44,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(504, 23);
             textBox1.TabIndex = 1;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // button1
             // 
@@ -54,11 +59,28 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(415, 205);
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ProductImage });
+            dataGridView1.Location = new Point(2, 170);
+            dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(504, 311);
+            dataGridView1.ReadOnly = true;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(1261, 509);
             dataGridView1.TabIndex = 4;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // searchProductDTOBindingSource
+            // 
+            searchProductDTOBindingSource.DataSource = typeof(DataAccess.Models.DTOs.SearchProductDTO);
+            // 
+            // ProductImage
+            // 
+            ProductImage.HeaderText = "Product Preview";
+            ProductImage.ImageLayout = DataGridViewImageCellLayout.Zoom;
+            ProductImage.Name = "ProductImage";
+            ProductImage.ReadOnly = true;
+            ProductImage.Resizable = DataGridViewTriState.False;
             // 
             // Form1
             // 
@@ -72,6 +94,7 @@
             Text = "Form1";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchProductDTOBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -80,5 +103,7 @@
         private TextBox textBox1;
         private Button button1;
         private DataGridView dataGridView1;
+        private BindingSource searchProductDTOBindingSource;
+        private DataGridViewImageColumn ProductImage;
     }
 }
