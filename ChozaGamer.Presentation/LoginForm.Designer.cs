@@ -210,6 +210,7 @@
             LoginButton.Size = new Size(150, 45);
             LoginButton.TabIndex = 5;
             LoginButton.TextOffset = new Point(0, 0);
+            LoginButton.Click += LoginButton_Click;
             // 
             // NotRegisteredLabel
             // 
@@ -251,6 +252,7 @@
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "LoginForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "LoginForm";
             panel1.ResumeLayout(false);
             ResumeLayout(false);

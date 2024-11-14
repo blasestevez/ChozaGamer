@@ -29,5 +29,11 @@ namespace ChozaGamer.Business.Services
             var response = await repository.RegisterUserAsync(registerUser);
             return response;
         }
+
+        public async Task<UserDTO> GetUserByUsernameAsync(string username)
+        {
+            var response = await repository.GetUserByUsernameAsync(username);
+            return response;
+        }
     }
 }

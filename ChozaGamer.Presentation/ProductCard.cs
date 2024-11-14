@@ -43,14 +43,24 @@ namespace ChozaGamer.Presentation
 
         private Image ConvertByteToImage(byte[] byteArray)
         {
-            if (byteArray == null)
+            if (byteArray == null || byteArray.Length == 0)
             {
                 return null;
             }
 
-            using(MemoryStream memoryStream = new MemoryStream(byteArray))
+            try
             {
-                return Image.FromStream(memoryStream);
+                using (MemoryStream memoryStream = new MemoryStream(byteArray))
+                {
+                    memoryStream.Position = 0;
+                    return Image.FromStream(memoryStream);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error converting byte array to image: {ex.Message}");
+                Console.WriteLine($"Byte array length: {byteArray.Length}");
+                return null;
             }
         }
     }

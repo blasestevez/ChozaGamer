@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             searchProductDTOBindingSource = new BindingSource(components);
             panel1 = new Panel();
+            LogoutButton = new CuoreUI.Controls.cuiButton();
             Logo = new CuoreUI.Controls.cuiPictureBox();
             MinimizeButton = new CuoreUI.Controls.cuiButton();
             CloseButton = new CuoreUI.Controls.cuiButton();
@@ -52,6 +53,7 @@
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel1.BackColor = Color.FromArgb(33, 33, 33);
+            panel1.Controls.Add(LogoutButton);
             panel1.Controls.Add(Logo);
             panel1.Controls.Add(MinimizeButton);
             panel1.Controls.Add(CloseButton);
@@ -62,6 +64,40 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1280, 90);
             panel1.TabIndex = 0;
+            // 
+            // LogoutButton
+            // 
+            LogoutButton.BackgroundImageLayout = ImageLayout.None;
+            LogoutButton.CheckButton = false;
+            LogoutButton.Checked = false;
+            LogoutButton.CheckedBackground = Color.FromArgb(33, 33, 33);
+            LogoutButton.CheckedImageTint = Color.White;
+            LogoutButton.CheckedOutline = Color.FromArgb(33, 33, 33);
+            LogoutButton.Content = "Logout";
+            LogoutButton.Cursor = Cursors.Hand;
+            LogoutButton.Font = new Font("Microsoft Sans Serif", 9.5F);
+            LogoutButton.ForeColor = Color.White;
+            LogoutButton.HoverBackground = Color.FromArgb(72, 72, 72);
+            LogoutButton.HoveredImageTint = Color.FromArgb(240, 50, 10);
+            LogoutButton.HoverOutline = Color.Empty;
+            LogoutButton.Image = Properties.Resources.ProfileIcon__2_;
+            LogoutButton.ImageAutoCenter = true;
+            LogoutButton.ImageExpand = new Point(7, 7);
+            LogoutButton.ImageOffset = new Point(-5, 0);
+            LogoutButton.ImageTint = Color.White;
+            LogoutButton.Location = new Point(977, 23);
+            LogoutButton.Name = "LogoutButton";
+            LogoutButton.NormalBackground = Color.FromArgb(33, 33, 33);
+            LogoutButton.NormalOutline = Color.Empty;
+            LogoutButton.OutlineThickness = 1.6F;
+            LogoutButton.PressedBackground = Color.FromArgb(72, 72, 72);
+            LogoutButton.PressedImageTint = Color.White;
+            LogoutButton.PressedOutline = Color.Empty;
+            LogoutButton.Rounding = new Padding(8);
+            LogoutButton.Size = new Size(80, 45);
+            LogoutButton.TabIndex = 6;
+            LogoutButton.TextOffset = new Point(0, 0);
+            LogoutButton.Click += LogoutButton_Click;
             // 
             // Logo
             // 
@@ -196,7 +232,7 @@
             ProfileButton.ImageExpand = new Point(7, 7);
             ProfileButton.ImageOffset = new Point(-5, 0);
             ProfileButton.ImageTint = Color.White;
-            ProfileButton.Location = new Point(1044, 23);
+            ProfileButton.Location = new Point(1075, 23);
             ProfileButton.Name = "ProfileButton";
             ProfileButton.NormalBackground = Color.FromArgb(33, 33, 33);
             ProfileButton.NormalOutline = Color.Empty;
@@ -290,5 +326,6 @@
         private TabPage tabPage2;
         private FlowLayoutPanel flowLayoutPanel1;
         private CuoreUI.Controls.cuiPictureBox Logo;
+        private CuoreUI.Controls.cuiButton LogoutButton;
     }
 }

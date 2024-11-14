@@ -34,5 +34,11 @@ namespace ChozaGamer.Business.Services
             var response = await repository.GetProductsBySubCategoryAsync(search, idSubCategory);
             return response;
         }
+
+        public async Task<bool> UploadProduct(ProductDTO product)
+        {
+            var response = await repository.UploadProductAsync(product);
+            return response;
+        }
     }
 }

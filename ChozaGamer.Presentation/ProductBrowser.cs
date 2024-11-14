@@ -6,20 +6,30 @@ namespace ChozaGamer.Presentation
 {
     public partial class ProductBrowser : Form
     {
-        private readonly ProductService service;
+        private readonly ProductService productService;
+        private readonly UserService userService;
         private List<SearchProductDTO> products;
 
-        public ProductBrowser(ProductService service)
+        public ProductBrowser(ProductService productService, UserService userService)
         {
             InitializeComponent();
-            this.service = service;
+            this.productService = productService;
+            this.userService = userService;
             LoadProducts();
         }
 
         private async void LoadProducts()
         {
-            products = await service.GetProducts();
-            DisplayProducts(products);
+            products = await productService.GetProducts();
+            if (products == null || !products.Any())
+            {
+                Console.WriteLine("No se cargaron productos.");
+            }
+            else
+            {
+                Console.WriteLine("Productos cargados exitosamente.");
+                DisplayProducts(products);
+            }
         }
 
         private void DisplayProducts(List<SearchProductDTO> products)
@@ -37,7 +47,6 @@ namespace ChozaGamer.Presentation
         }
         private void ProfileButton_Click(object sender, EventArgs e)
         {
-
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
@@ -56,7 +65,44 @@ namespace ChozaGamer.Presentation
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            var filteredProducts = products.Where(x => x.name.Contains(SearchBar.Text)).ToList();
+            string searchText = SearchBar.Content.Trim();
+
+            if (products != null && products.Any() && !string.IsNullOrEmpty(searchText))
+            {
+                List<SearchProductDTO> filteredProducts = new List<SearchProductDTO>();
+
+                filteredProducts = products.Where(p => p.name.ToLower().Trim().Contains(searchText.ToLower().Trim())).ToList();
+
+                if (filteredProducts.Any())
+                {
+                    DisplayProducts(filteredProducts);
+                }
+                else
+                {
+                    MessageBox.Show("There are no matches.");
+                    DisplayProducts(products);
+                }
+            }
+            else
+            {
+                DisplayProducts(products);
+            }
+        }
+
+        private void LogoutButton_Click(object sender, EventArgs e)
+        {
+            LoginForm existingLoginForm = Application.OpenForms.OfType<LoginForm>().FirstOrDefault();
+
+            if (existingLoginForm != null && !existingLoginForm.IsDisposed)
+            {
+                existingLoginForm.Show();
+            }
+            else
+            {
+                LoginForm loginForm = new LoginForm(productService, userService);
+                loginForm.Show();
+            }
+            this.Hide();
         }
     }
 }

@@ -21,6 +21,20 @@ namespace ChozaGamer.DataAccess.Repositories
             this.dbContext = dbContext;
             this.mapper = mapper;
         }
+
+        public async Task<UserDTO> GetUserByUsernameAsync(string username)
+        {
+            var user = await dbContext.Users.FirstOrDefaultAsync(x => x.username == username);
+            
+            if (user == null)
+            {
+                return null;
+            }
+
+            UserDTO userDTO = mapper.Map<UserDTO>(user);
+            return userDTO;
+        }
+
         public async Task<bool> LoginUserAsync(LoginUserDTO loginUser)
         {
             var user = await dbContext.Users.FirstOrDefaultAsync(x => x.username == loginUser.username);

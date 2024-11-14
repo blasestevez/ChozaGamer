@@ -11,24 +11,24 @@ namespace ChozaGamer.DataAccess.Models.Domain
     {
         public int id { get; set; }
         public string name { get; set; }
-        public string description { get; set; }
-        public int idCategory { get; set; }
-        public int idBrand { get; set; }
+        public string? description { get; set; }
+        public int? idCategory { get; set; }
+        public int? idBrand { get; set; }
         [Column(TypeName = "decimal(18,2)")]
-        public decimal specialPrice { get; set; }
+        public decimal? specialPrice { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal defaultPrice { get; set; }
-        public int idSubCategory { get; set; }
-        public int stock { get; set; }
-        public string productCode { get; set; }
-        public byte[] productImage { get; set; }
-        public bool sale { get; set; }
-        public int warranty { get; set; }
+        public int? idSubCategory { get; set; }
+        public int? stock { get; set; }
+        public string? productCode { get; set; }
+        public byte[]? productImage { get; set; }
+        public bool? sale { get; set; }
+        public int? warranty { get; set; }
         [Column(TypeName = "decimal(3,2)")]
-        public decimal iva { get; set; }
-        public Category Category { get; set; }
-        public Brand Brand { get; set; }
-        public SubCategory SubCategory { get; set; }
+        public decimal? iva { get; set; }
+        public Category? Category { get; set; }
+        public Brand? Brand { get; set; }
+        public SubCategory? SubCategory { get; set; }
 
         public void ModifyStock(int quantity)
         {
@@ -47,7 +47,8 @@ namespace ChozaGamer.DataAccess.Models.Domain
 
         public decimal CalculatePrice()
         {
-            decimal finalPrice = defaultPrice + (defaultPrice * iva);
+            decimal finalIva = iva ?? 0;
+            decimal finalPrice = defaultPrice + (defaultPrice * finalIva);
             return finalPrice;
         }
 

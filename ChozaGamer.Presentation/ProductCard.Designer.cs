@@ -37,6 +37,7 @@
             // 
             // ProductCardImage
             // 
+            ProductCardImage.BackgroundImageLayout = ImageLayout.Zoom;
             ProductCardImage.Location = new Point(25, 25);
             ProductCardImage.Name = "ProductCardImage";
             ProductCardImage.Size = new Size(150, 150);

@@ -11,5 +11,6 @@ namespace ChozaGamer.DataAccess.IRepositories
     {
         Task<bool> RegisterUserAsync(RegisterUserDTO registerUser);
         Task<bool> LoginUserAsync(LoginUserDTO loginUser);
+        Task<UserDTO> GetUserByUsernameAsync(string username);
     }
 }

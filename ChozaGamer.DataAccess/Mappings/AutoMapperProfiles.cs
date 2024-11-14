@@ -23,7 +23,28 @@ namespace ChozaGamer.DataAccess.Mappings
 
             CreateMap<RegisterUserDTO, User>()
                 .ForMember(dest => dest.hashedPassword, opt => opt.Ignore());
-                
+
+            CreateMap<User, UserDTO>()
+                .ForMember(dest => dest.username, opt => opt.MapFrom(src => src.username))
+                .ForMember(dest => dest.userType, opt => opt.MapFrom(src => src.userType))
+                .ForSourceMember(src => src.hashedPassword, opt => opt.DoNotValidate())
+                .ForSourceMember(src => src.id, opt => opt.DoNotValidate());
+
+            CreateMap<ProductDTO, Product>()
+                .ForMember(dest => dest.Category, opt => opt.Ignore())
+                .ForMember(dest => dest.Brand, opt => opt.Ignore())
+                .ForMember(dest => dest.SubCategory, opt => opt.Ignore())
+                .ForMember(dest => dest.idCategory, opt => opt.Ignore())
+                .ForMember(dest => dest.idBrand, opt => opt.Ignore())
+                .ForMember(dest => dest.idSubCategory, opt => opt.Ignore())
+                .ForMember(dest => dest.iva, opt => opt.Ignore())
+                .ForMember(dest => dest.description, opt => opt.Ignore())
+                .ForMember(dest => dest.productCode, opt => opt.Ignore())
+                .ForMember(dest => dest.sale, opt => opt.Ignore())
+                .ForMember(dest => dest.specialPrice, opt => opt.Ignore())
+                .ForMember(dest => dest.stock, opt => opt.Ignore())
+                .ForMember(dest => dest.warranty, opt => opt.Ignore());
+
 
         }
     }

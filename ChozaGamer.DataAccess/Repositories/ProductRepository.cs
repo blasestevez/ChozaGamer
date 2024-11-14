@@ -53,5 +53,15 @@ namespace ChozaGamer.DataAccess.Repositories
 
             return mapper.Map<List<SearchProductDTO>>(products);
         }
+
+        public async Task<bool> UploadProductAsync(ProductDTO productDTO)
+        {
+            var productEntity = mapper.Map<Product>(productDTO);
+
+            await dbContext.Products.AddAsync(productEntity);
+            await dbContext.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

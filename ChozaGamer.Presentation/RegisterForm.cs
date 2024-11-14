@@ -36,6 +36,14 @@ namespace ChozaGamer.Presentation
 
         private async void RegisterButton_Click(object sender, EventArgs e)
         {
+            if (this.IsDisposed) return;
+
+            if (UserTypeListBox.SelectedIndex.ToString() == "-1")
+            {
+                MessageBox.Show("Select a user type.");
+                return;
+            }
+
             RegisterUserDTO registerUserDTO = new RegisterUserDTO
             {
                 username = UsernameTextBox.Content,
@@ -43,7 +51,11 @@ namespace ChozaGamer.Presentation
                 userType = false
             };
 
-            var response =  await userService.RegisterUserAsync(registerUserDTO);
+            if (UserTypeListBox.SelectedIndex.ToString() == "0")
+            {
+                registerUserDTO.userType = true;
+            }
+            var response = await userService.RegisterUserAsync(registerUserDTO);
             if (!response)
             {
                 MessageBox.Show("Error trying to register. Check the credentials.");
@@ -52,16 +64,34 @@ namespace ChozaGamer.Presentation
             {
                 MessageBox.Show("User registered successfully.");
             }
-            LoginForm loginForm = new LoginForm(productService, userService);
-            loginForm.Show();
-            this.Close();
+
+            LoginForm existingLoginForm = Application.OpenForms.OfType<LoginForm>().FirstOrDefault();
+            if (existingLoginForm != null && !existingLoginForm.IsDisposed)
+            {
+                existingLoginForm.Show();
+            }
+            else
+            {
+                LoginForm loginForm = new LoginForm(productService, userService);
+                loginForm.Show();
+            }
+            this.Hide();
         }
 
         private void RegisteredRedirectLabel_Click(object sender, EventArgs e)
         {
-            LoginForm loginForm = new LoginForm(productService, userService);
-            loginForm.Show();
-            this.Close();
+            LoginForm existingLoginForm = Application.OpenForms.OfType<LoginForm>().FirstOrDefault();
+
+            if (existingLoginForm != null && !existingLoginForm.IsDisposed)
+            {
+                existingLoginForm.Show();
+            }
+            else
+            {
+                LoginForm loginForm = new LoginForm(productService, userService);
+                loginForm.Show();
+            }
+            this.Hide();
         }
     }
 }

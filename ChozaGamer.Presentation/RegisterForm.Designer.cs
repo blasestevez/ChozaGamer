@@ -37,6 +37,7 @@
             RegisterButton = new CuoreUI.Controls.cuiButton();
             PasswordTextBox = new CuoreUI.Controls.cuiTextBox2();
             UsernameTextBox = new CuoreUI.Controls.cuiTextBox2();
+            UserTypeListBox = new CuoreUI.Controls.cuiComboBox();
             SuspendLayout();
             // 
             // panel1
@@ -199,7 +200,7 @@
             PasswordTextBox.Cursor = Cursors.IBeam;
             PasswordTextBox.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
             PasswordTextBox.ForeColor = Color.Gray;
-            PasswordTextBox.Location = new Point(45, 212);
+            PasswordTextBox.Location = new Point(45, 182);
             PasswordTextBox.Margin = new Padding(4);
             PasswordTextBox.Multiline = false;
             PasswordTextBox.Name = "PasswordTextBox";
@@ -223,7 +224,7 @@
             UsernameTextBox.Cursor = Cursors.IBeam;
             UsernameTextBox.Font = new Font("Microsoft Sans Serif", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 0);
             UsernameTextBox.ForeColor = Color.Gray;
-            UsernameTextBox.Location = new Point(45, 144);
+            UsernameTextBox.Location = new Point(45, 114);
             UsernameTextBox.Margin = new Padding(4);
             UsernameTextBox.Multiline = false;
             UsernameTextBox.Name = "UsernameTextBox";
@@ -237,12 +238,41 @@
             UsernameTextBox.TextOffset = new Size(0, 0);
             UsernameTextBox.UnderlinedStyle = false;
             // 
+            // UserTypeListBox
+            // 
+            UserTypeListBox.BackgroundColor = Color.FromArgb(10, 10, 10);
+            UserTypeListBox.ButtonHoverBackground = Color.FromArgb(200, 255, 106, 0);
+            UserTypeListBox.ButtonHoverOutline = Color.FromArgb(255, 106, 0);
+            UserTypeListBox.ButtonNormalBackground = Color.FromArgb(255, 106, 0);
+            UserTypeListBox.ButtonNormalOutline = Color.FromArgb(255, 106, 0);
+            UserTypeListBox.ButtonPressedBackground = Color.FromArgb(255, 106, 0);
+            UserTypeListBox.ButtonPressedOutline = Color.FromArgb(255, 106, 0);
+            UserTypeListBox.Cursor = Cursors.Hand;
+            UserTypeListBox.DropDownBackgroundColor = Color.FromArgb(14, 14, 14);
+            UserTypeListBox.DropDownOutlineColor = Color.FromArgb(30, 255, 255, 255);
+            UserTypeListBox.ExpandArrowColor = Color.White;
+            UserTypeListBox.ForeColor = SystemColors.Control;
+            UserTypeListBox.Items = new string[]
+    {
+    "Admin",
+    "Client"
+    };
+            UserTypeListBox.Location = new Point(75, 243);
+            UserTypeListBox.Margin = new Padding(4, 3, 4, 3);
+            UserTypeListBox.Name = "UserTypeListBox";
+            UserTypeListBox.OutlineColor = Color.FromArgb(35, 255, 255, 255);
+            UserTypeListBox.OutlineThickness = 1F;
+            UserTypeListBox.Rounding = 0;
+            UserTypeListBox.Size = new Size(147, 39);
+            UserTypeListBox.TabIndex = 14;
+            // 
             // RegisterForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(72, 72, 72);
             ClientSize = new Size(300, 400);
+            Controls.Add(UserTypeListBox);
             Controls.Add(Logo);
             Controls.Add(CloseButton);
             Controls.Add(MinimizeButton);
@@ -269,5 +299,6 @@
         private CuoreUI.Controls.cuiButton RegisterButton;
         private CuoreUI.Controls.cuiTextBox2 PasswordTextBox;
         private CuoreUI.Controls.cuiTextBox2 UsernameTextBox;
+        private CuoreUI.Controls.cuiComboBox UserTypeListBox;
     }
 }
