@@ -21,10 +21,9 @@ namespace ChozaGamer.DataAccess.Repositories
             this.dbContext = dbContext;
             this.mapper = mapper;
         }
-        public async Task<List<SearchProductDTO>> GetProductsAsync(string search)
+        public async Task<List<SearchProductDTO>> GetProductsAsync()
         {
-            var products = await dbContext.Products.Where(x => x.name.Contains(search))
-                .Include(p => p.ProductImages)
+            var products = await dbContext.Products
                 .Include(p => p.Category)
                 .Include(p => p.Brand)
                 .Include(p => p.SubCategory)
@@ -36,7 +35,6 @@ namespace ChozaGamer.DataAccess.Repositories
         public async Task<List<SearchProductDTO>> GetProductsByCategoryAsync(string search, int idCategory)
         {
             var products = await dbContext.Products.Where(x => x.idCategory == idCategory && x.name.Contains(search))
-                .Include(p => p.ProductImages)
                 .Include(p => p.Category)
                 .Include(p => p.Brand)
                 .Include(p => p.SubCategory)
@@ -48,7 +46,6 @@ namespace ChozaGamer.DataAccess.Repositories
         public async Task<List<SearchProductDTO>> GetProductsBySubCategoryAsync(string search, int idSubCategory)
         {
             var products = await dbContext.Products.Where(x => x.idSubCategory == idSubCategory && x.name.Contains(search))
-                .Include(p => p.ProductImages)
                 .Include(p => p.Category)
                 .Include(p => p.Brand)
                 .Include(p => p.SubCategory)

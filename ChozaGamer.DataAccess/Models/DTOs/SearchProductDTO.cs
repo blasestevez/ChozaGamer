@@ -9,12 +9,13 @@ namespace ChozaGamer.DataAccess.Models.DTOs
 {
     public class SearchProductDTO
     {
+        public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public string categoryName { get; set; }
         public string brandName { get; set; }
         public string subCategoryName { get; set; }
-        public List<byte[]> productImages { get; set; } = new List<byte[]>();
+        public byte[] productImage { get; set; }
         public decimal specialPrice { get; set; }
         public decimal defaultPrice { get; set; }
         public int stock { get; set; }

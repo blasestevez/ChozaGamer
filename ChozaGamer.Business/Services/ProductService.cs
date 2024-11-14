@@ -17,9 +17,9 @@ namespace ChozaGamer.Business.Services
         {
             this.repository = repository;
         }
-        public async Task<List<SearchProductDTO>> GetProducts(string search)
+        public async Task<List<SearchProductDTO>> GetProducts()
         {
-            var response = await repository.GetProductsAsync(search);
+            var response = await repository.GetProductsAsync();
             return response;
         }
 

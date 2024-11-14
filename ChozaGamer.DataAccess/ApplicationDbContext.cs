@@ -13,8 +13,8 @@ namespace ChozaGamer.DataAccess
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -34,12 +34,6 @@ namespace ChozaGamer.DataAccess
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.idCategory)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Product>()
-                .HasMany(p => p.ProductImages)
-                .WithOne(pi => pi.Product)
-                .HasForeignKey(pi => pi.idProduct)
-                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<SubCategory>()
                 .HasMany(sc => sc.Products)

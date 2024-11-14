@@ -21,19 +21,17 @@ namespace ChozaGamer.Presentation
             var services = new ServiceCollection();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer("Server=PC92;Database=ChozaGamer;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"));
+                options.UseSqlServer("Server=DESKTOP-JSV8JHV;Database=ChozaGamer;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"));
             
             services.AddAutoMapper(typeof(AutoMapperProfiles));
 
-            services.AddScoped<ProductRepository>();
             services.AddScoped<ProductService>();
-
-            services.AddSingleton<Form1>();
+            services.AddScoped<UserService>();
 
             var serviceProvider = services.BuildServiceProvider();
 
             ApplicationConfiguration.Initialize();
-            Application.Run(serviceProvider.GetRequiredService<Form1>());
+            Application.Run(serviceProvider.GetRequiredService<LoginForm>());
         }
     }
 }

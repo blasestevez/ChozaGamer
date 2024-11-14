@@ -18,15 +18,14 @@ namespace ChozaGamer.DataAccess.Models.Domain
         public decimal specialPrice { get; set; }
         [Column(TypeName = "decimal(18,2)")]
         public decimal defaultPrice { get; set; }
-        public List<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
         public int idSubCategory { get; set; }
         public int stock { get; set; }
         public string productCode { get; set; }
+        public byte[] productImage { get; set; }
         public bool sale { get; set; }
         public int warranty { get; set; }
         [Column(TypeName = "decimal(3,2)")]
         public decimal iva { get; set; }
-
         public Category Category { get; set; }
         public Brand Brand { get; set; }
         public SubCategory SubCategory { get; set; }
@@ -56,16 +55,16 @@ namespace ChozaGamer.DataAccess.Models.Domain
         {
         }
 
-        public Product(int id, string name, string description, int idCategory, int idBrand, decimal specialPrice, decimal defaultPrice, List<ProductImage> productImages, int idSubCategory, int stock, string productCode, bool sale, int warranty, decimal iva)
+        public Product(int id, string name, string description, int idCategory, int idBrand, byte[] productImage, decimal specialPrice, decimal defaultPrice, int idSubCategory, int stock, string productCode, bool sale, int warranty, decimal iva)
         {
             this.id = id;
             this.name = name;
             this.description = description;
             this.idCategory = idCategory;
             this.idBrand = idBrand;
+            this.productImage = productImage;
             this.specialPrice = specialPrice;
             this.defaultPrice = defaultPrice;
-            ProductImages = productImages;
             this.idSubCategory = idSubCategory;
             this.stock = stock;
             this.productCode = productCode;

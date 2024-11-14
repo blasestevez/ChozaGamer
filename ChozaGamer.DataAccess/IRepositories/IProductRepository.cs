@@ -10,7 +10,7 @@ namespace ChozaGamer.DataAccess.IRepositories
 {
     public interface IProductRepository
     {
-        Task<List<SearchProductDTO>> GetProductsAsync(string search);
+        Task<List<SearchProductDTO>> GetProductsAsync();
         Task<List<SearchProductDTO>> GetProductsByCategoryAsync(string search, int idCategory);
         Task<List<SearchProductDTO>> GetProductsBySubCategoryAsync(string search, int idSubCategory);
     }
