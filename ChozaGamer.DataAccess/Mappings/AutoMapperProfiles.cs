@@ -16,7 +16,8 @@ namespace ChozaGamer.DataAccess.Mappings
             CreateMap<Product, SearchProductDTO>()
                 .ForMember(dest => dest.categoryName, opt => opt.MapFrom(src => src.Category.name))
                 .ForMember(dest => dest.brandName, opt => opt.MapFrom(src => src.Brand.name))
-                .ForMember(dest => dest.subCategoryName, opt => opt.MapFrom(src => src.SubCategory.name));
+                .ForMember(dest => dest.subCategoryName, opt => opt.MapFrom(src => src.SubCategory.name))
+                .ReverseMap();
 
             CreateMap<LoginUserDTO, User>()
                 .ForMember(dest => dest.hashedPassword, opt => opt.Ignore());

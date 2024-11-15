@@ -24,7 +24,7 @@ namespace ChozaGamer.DataAccess.Models.Domain
         public byte[]? productImage { get; set; }
         public bool? sale { get; set; }
         public int? warranty { get; set; }
-        [Column(TypeName = "decimal(3,2)")]
+        [Column(TypeName = "decimal(5,2)")]
         public decimal? iva { get; set; }
         public Category? Category { get; set; }
         public Brand? Brand { get; set; }

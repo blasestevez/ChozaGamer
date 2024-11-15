@@ -1,4 +1,5 @@
 ﻿using ChozaGamer.Business.Services;
+using ChozaGamer.DataAccess.Models.Domain;
 using ChozaGamer.DataAccess.Models.DTOs;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,44 @@ namespace ChozaGamer.Presentation
     {
         private readonly ProductService productService;
         private readonly UserService userService;
+        private List<SearchProductDTO> products;
 
         public AdminPanel(ProductService productService, UserService userService)
         {
             InitializeComponent();
             this.productService = productService;
             this.userService = userService;
+            LoadProducts();
+            ManageProductPanel.Hide();
         }
 
+        private async void LoadProducts()
+        {
+            products = await productService.GetProducts();
+            if (products == null || !products.Any())
+            {
+                Console.WriteLine("No se cargaron productos.");
+            }
+            else
+            {
+                Console.WriteLine("Productos cargados exitosamente.");
+                DisplayProducts(products);
+            }
+        }
+
+        private void DisplayProducts(List<SearchProductDTO> products)
+        {
+            flowLayoutPanel1.Controls.Clear();
+
+            foreach (var product in products)
+            {
+                SelectableProductCard selectableProductCard = new SelectableProductCard(product, false);
+                selectableProductCard.Dock = DockStyle.Top;
+                selectableProductCard.Margin = new Padding(0, 0, 0, 10);
+
+                flowLayoutPanel1.Controls.Add(selectableProductCard);
+            }
+        }
         private void CloseButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -33,72 +64,6 @@ namespace ChozaGamer.Presentation
         {
             this.WindowState = FormWindowState.Minimized;
         }
-
-        private void AdminPanelComboBox_TabIndexChanged(object sender, EventArgs e)
-        {
-            if (AdminPanelComboBox.SelectedIndex == 0) // product
-            {
-
-            }
-        }
-
-        private void AdminPanelSelectFileButton_Click(object sender, EventArgs e)
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-                openFileDialog.Title = "Select an image";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    string filePath = openFileDialog.FileName;
-
-                    try
-                    {
-                        AdminPanelProductPicture.Content = new Bitmap(filePath);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error loading image: " + ex.Message);
-                    }
-                }
-            }
-        }
-
-        private async void AdminPanelAddButton_Click(object sender, EventArgs e)
-        {
-            ProductDTO productDTO = new ProductDTO
-            {
-                name = AdminPanelProductNameBar.Content,
-                defaultPrice = Convert.ToDecimal(PriceNUD.Value),
-                productImage = ConvertImageToByte(AdminPanelProductPicture.Content)
-            };
-
-            await productService.UploadProduct(productDTO);
-        }
-
-        private byte[] ConvertImageToByte(Image image)
-        {
-            if (image == null)
-            {
-                return null;
-            }
-
-            try
-            {
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    image.Save(memoryStream, image.RawFormat);
-                    return memoryStream.ToArray();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error converting image to byte array: {ex.Message}");
-                return null;
-            }
-        }
-
         private void LogoutButton_Click(object sender, EventArgs e)
         {
             LoginForm existingLoginForm = Application.OpenForms.OfType<LoginForm>().FirstOrDefault();
@@ -113,6 +78,30 @@ namespace ChozaGamer.Presentation
                 loginForm.Show();
             }
             this.Hide();
+        }
+
+        private void ManageProductsButton_Click(object sender, EventArgs e)
+        {
+            ManageProduct();
+        }
+
+        private void ManageProduct()
+        {
+            var selectedProduct = flowLayoutPanel1.Controls.OfType<SelectableProductCard>().FirstOrDefault();
+            ManageItem manageItem = new ManageItem(products[0], null, null, null, productService);
+            flowLayoutPanel1.Hide();
+            ManageProductPanel.Show();
+            ManageProductPanel.Controls.Add(manageItem);
+
+            manageItem.ProductUpdated += ManageItem_ProductUpdated;
+        }
+
+        private void ManageItem_ProductUpdated(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Show();
+            ManageProductPanel.Controls.Clear();
+            ManageProductPanel.Hide();
+            LoadProducts();
         }
     }
 }

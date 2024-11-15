@@ -54,6 +54,23 @@ namespace ChozaGamer.DataAccess.Repositories
             return mapper.Map<List<SearchProductDTO>>(products);
         }
 
+        public async Task<bool> UpdateProductAsync(SearchProductDTO productDTO)
+        {
+
+            var productEntity = await dbContext.Products.FindAsync(productDTO.id);
+
+            if (productEntity == null)
+            {
+                return false;
+            }
+
+            var updatedProduct = mapper.Map(productDTO, productEntity);
+
+            await dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<bool> UploadProductAsync(ProductDTO productDTO)
         {
             var productEntity = mapper.Map<Product>(productDTO);

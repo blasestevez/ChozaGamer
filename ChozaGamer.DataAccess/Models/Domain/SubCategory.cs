@@ -9,9 +9,9 @@ namespace ChozaGamer.DataAccess.Models.Domain
     public class SubCategory
     {
         public int id { get; set; }
-        public string name { get; set; }
-        public int idCategory { get; set; }
-        public Category Category { get; set; }
-        public List<Product> Products { get; set; } = new List<Product>();
+        public string? name { get; set; }
+        public int? idCategory { get; set; }
+        public Category? Category { get; set; }
+        public List<Product>? Products { get; set; } = new List<Product>();
     }
 }

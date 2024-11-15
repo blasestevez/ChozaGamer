@@ -1,5 +1,4 @@
-﻿using ChozaGamer.DataAccess.Models.Domain;
-using ChozaGamer.DataAccess.Models.DTOs;
+﻿using ChozaGamer.DataAccess.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,20 +11,29 @@ using System.Windows.Forms;
 
 namespace ChozaGamer.Presentation
 {
-    public partial class ProductCard : UserControl
+    public partial class SelectableProductCard : UserControl
     {
         private readonly SearchProductDTO product;
+        private bool isSelected;
 
-        public ProductCard(SearchProductDTO product)
+        public SelectableProductCard(SearchProductDTO product, bool isSelected)
         {
             InitializeComponent();
             this.product = product;
-
+            this.isSelected = isSelected;
             productName = product.name;
             productPrice = "$" + product.defaultPrice.ToString();
             productImage = ConvertByteToImage(product.productImage);
         }
 
+        private bool isSelected()
+        {
+            if (true)
+            {
+
+            }
+            return isSelected;
+        }
         public string productName
         {
             set { ProductCardProdName.Text = value; }
@@ -64,9 +72,16 @@ namespace ChozaGamer.Presentation
             }
         }
 
-        private void ProductCardImage_Click(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (checkBox1.Checked)
+            {
+                isSelected = true;
+            }
+            else
+            {
+                 isSelected = false;
+            }
         }
     }
 }
