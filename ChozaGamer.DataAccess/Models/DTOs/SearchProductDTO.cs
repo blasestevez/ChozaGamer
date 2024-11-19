@@ -12,6 +12,9 @@ namespace ChozaGamer.DataAccess.Models.DTOs
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
+        public int idBrand { get; set; }
+        public int idCategory { get; set; }
+        public int idSubCategory { get; set; }
         public string categoryName { get; set; }
         public string brandName { get; set; }
         public string subCategoryName { get; set; }

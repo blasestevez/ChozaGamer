@@ -31,21 +31,6 @@ namespace ChozaGamer.DataAccess.Mappings
                 .ForSourceMember(src => src.hashedPassword, opt => opt.DoNotValidate())
                 .ForSourceMember(src => src.id, opt => opt.DoNotValidate());
 
-            CreateMap<ProductDTO, Product>()
-                .ForMember(dest => dest.Category, opt => opt.Ignore())
-                .ForMember(dest => dest.Brand, opt => opt.Ignore())
-                .ForMember(dest => dest.SubCategory, opt => opt.Ignore())
-                .ForMember(dest => dest.idCategory, opt => opt.Ignore())
-                .ForMember(dest => dest.idBrand, opt => opt.Ignore())
-                .ForMember(dest => dest.idSubCategory, opt => opt.Ignore())
-                .ForMember(dest => dest.iva, opt => opt.Ignore())
-                .ForMember(dest => dest.description, opt => opt.Ignore())
-                .ForMember(dest => dest.productCode, opt => opt.Ignore())
-                .ForMember(dest => dest.sale, opt => opt.Ignore())
-                .ForMember(dest => dest.specialPrice, opt => opt.Ignore())
-                .ForMember(dest => dest.stock, opt => opt.Ignore())
-                .ForMember(dest => dest.warranty, opt => opt.Ignore());
-
             CreateMap<Brand, BrandDTO>()
                 .ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Products))
                 .ReverseMap();

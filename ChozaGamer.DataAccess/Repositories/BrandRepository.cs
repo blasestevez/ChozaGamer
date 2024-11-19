@@ -63,9 +63,10 @@ namespace ChozaGamer.DataAccess.Repositories
 
         public async Task<bool> UploadBrandAsync(BrandDTO brandDTO)
         {
-            var brandEntity = mapper.Map<Brand>(brandDTO);
+            Brand brand = new Brand();
+            mapper.Map(brandDTO, brand);
 
-            await dbContext.Brands.AddAsync(brandEntity);
+            await dbContext.Brands.AddAsync(brand);
             await dbContext.SaveChangesAsync();
 
             return true;

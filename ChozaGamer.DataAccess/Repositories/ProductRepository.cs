@@ -87,9 +87,30 @@ namespace ChozaGamer.DataAccess.Repositories
 
         public async Task<bool> UploadProductAsync(SearchProductDTO productDTO)
         {
-            var productEntity = mapper.Map<Product>(productDTO) ;
 
-            await dbContext.Products.AddAsync(productEntity);
+            Product product = new Product();
+            mapper.Map(productDTO, product);
+
+            var existingBrand = await dbContext.Brands.FindAsync(product.idBrand);
+            var existingCategory = await dbContext.Categories.FindAsync(product.idCategory);
+            var existingSubCategory = await dbContext.SubCategories.FindAsync(product.idSubCategory);
+
+            if (existingBrand != null)
+            {
+                product.Brand = existingBrand;
+            }
+
+            if (existingCategory != null)
+            {
+                product.Category = existingCategory;
+            }
+
+            if (existingSubCategory != null)
+            {
+                product.SubCategory = existingSubCategory;
+            }
+
+            await dbContext.Products.AddAsync(product);
             await dbContext.SaveChangesAsync();
 
             return true;

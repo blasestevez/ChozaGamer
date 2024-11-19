@@ -70,7 +70,7 @@ namespace ChozaGamer.DataAccess.Models.Domain
             this.stock = stock;
             this.productCode = productCode;
             this.sale = sale;
-            this.warranty = Brand.warranty;
+            this.warranty = warranty;
             this.iva = iva;
         }
     }

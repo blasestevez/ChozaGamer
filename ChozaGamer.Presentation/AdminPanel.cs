@@ -142,7 +142,13 @@ namespace ChozaGamer.Presentation
                 };
                 ItemsPanel.Controls.Add(selectableBrandCard);
             }
-
+            AddButton addButton = new AddButton();
+            ItemsPanel.Controls.Add(addButton);
+            addButton.OpenAddFormButtonClick += (s, e) =>
+            {
+                AddBrandForm addBrandForm = new AddBrandForm(brandService);
+                addBrandForm.Show();
+            };
         }
 
         private void DisplayCategories(List<CategoryDTO> categories)
@@ -182,6 +188,13 @@ namespace ChozaGamer.Presentation
                 };
                 ItemsPanel.Controls.Add(selectableCategoryCard);
             }
+            AddButton addButton = new AddButton();
+            ItemsPanel.Controls.Add(addButton);
+            addButton.OpenAddFormButtonClick += (s, e) =>
+            {
+                AddCategoryForm addCategoryForm = new AddCategoryForm(categoryService);
+                addCategoryForm.Show();
+            };
         }
 
         private void DisplaySubCategories(List<SubCategoryDTO> subCategories)
@@ -221,6 +234,13 @@ namespace ChozaGamer.Presentation
                 };
                 ItemsPanel.Controls.Add(selectableSubCategoryCard);
             }
+            AddButton addButton = new AddButton();
+            ItemsPanel.Controls.Add(addButton);
+            addButton.OpenAddFormButtonClick += (s, e) =>
+            {
+                AddSubCategoryForm addSubCategoryForm = new AddSubCategoryForm(subCategoryService, categoryService);
+                addSubCategoryForm.Show();
+            };
         }
 
         private void ManageBrand(BrandDTO brand)

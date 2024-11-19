@@ -31,31 +31,35 @@ namespace ChozaGamer.Presentation
             this.brandService = brandService;
             this.categoryService = categoryService;
             this.subCategoryService = subCategoryService;
-            GetItems();
+
             FillComboBoxes();
         }
 
         private async void FillComboBoxes()
         {
-            await GetItems();
-            foreach (var brand in brands)
-            {
-            BrandsComboBox.AddItem(brand.name);
-            }
-            //foreach (var category in categories)
-            //{
-            //    CategoryComboBox.AddItem(category.name);
-            //}
-            //foreach (var subCategory in subCategories)
-            //{
-            //    SubCategoryComboBox.AddItem(subCategory.name);
-            //}
+            await GetBrands();
+            var nonNullBrands = brands.Where(x => x.name != null).Select(x => x.name).ToArray();
+            BrandsComboBox.Items.AddRange(nonNullBrands);
+            var nonNullCategories = categories.Where(x => x.name != null).Select(x => x.name).ToArray();
+            CategoriesComboBox.Items.AddRange(nonNullCategories);
+            var nonNullSubCategories = subCategories.Where(x => x.name != null).Select(x => x.name).ToArray();
+            SubCategoriesComboBox.Items.AddRange(nonNullSubCategories);
         }
 
-        private async Task GetItems()
+        private async Task GetBrands()
+        {
+            brands = await brandService.GetBrands();
+            await GetCategories();
+        }
+
+        private async Task GetCategories()
         {
             categories = await categoryService.GetCategories();
-            brands = await brandService.GetBrands();
+            await GetSubCategories();
+        }
+
+        private async Task GetSubCategories()
+        {
             subCategories = await subCategoryService.GetSubCategories();
         }
 
@@ -80,28 +84,6 @@ namespace ChozaGamer.Presentation
                         MessageBox.Show("Error loading image: " + ex.Message);
                     }
                 }
-            }
-        }
-        private Image ConvertByteToImage(byte[] byteArray)
-        {
-            if (byteArray == null || byteArray.Length == 0)
-            {
-                return null;
-            }
-
-            try
-            {
-                using (MemoryStream memoryStream = new MemoryStream(byteArray))
-                {
-                    memoryStream.Position = 0;
-                    return Image.FromStream(memoryStream);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error converting byte array to image: {ex.Message}");
-                Console.WriteLine($"Byte array length: {byteArray.Length}");
-                return null;
             }
         }
         private byte[] ConvertImageToByte(Image image)
@@ -135,6 +117,12 @@ namespace ChozaGamer.Presentation
                 product.defaultPrice = Convert.ToDecimal(ProductDefaultPriceBar.Content);
                 product.specialPrice = Convert.ToDecimal(ProductSpecialPriceBar.Content);
                 product.stock = Convert.ToInt32(ProductStockBar.Content);
+                product.brandName = BrandsComboBox.SelectedItem.ToString();
+                product.categoryName = CategoriesComboBox.SelectedItem.ToString();
+                product.subCategoryName = SubCategoriesComboBox.SelectedItem.ToString();
+                product.idBrand = brands.FirstOrDefault(x => x.name == BrandsComboBox.SelectedItem.ToString()).id;
+                product.idCategory = categories.FirstOrDefault(x => x.name == CategoriesComboBox.SelectedItem.ToString()).id;
+                product.idSubCategory = subCategories.FirstOrDefault(x => x.name == SubCategoriesComboBox.SelectedItem.ToString()).id;
                 product.productCode = ProductCodeBar.Content;
 
                 if (BrandsComboBox.SelectedIndex == -1)
@@ -142,21 +130,18 @@ namespace ChozaGamer.Presentation
                     MessageBox.Show("Select a category.");
                     return;
                 }
-                //if (CategoryComboBox.SelectedIndex == -1)
-                //{
-                //    MessageBox.Show("Select a category.");
-                //    return;
-                //}
-                //if (SubCategoryComboBox.SelectedIndex == -1)
-                //{
-                //    MessageBox.Show("Select a subcategory.");
-                //    return;
-                //}
+                if (CategoriesComboBox.SelectedIndex == -1)
+                {
+                    MessageBox.Show("select a category.");
+                    return;
+                }
+                if (SubCategoriesComboBox.SelectedIndex == -1)
+                {
+                    MessageBox.Show("select a subcategory.");
+                    return;
+                }
                 var selectedBrand = brands.FirstOrDefault(x => x.name == BrandsComboBox.SelectedItem.ToString());
-                //product.brandName = selectedBrand.name;
-                //product.categoryName = categories.FirstOrDefault(x => x.name == CategoryComboBox.SelectedItem.ToString()).name;
-                //product.subCategoryName = subCategories.FirstOrDefault(x => x.name == SubCategoryComboBox.SelectedItem.ToString()).name;
-                product.warranty =  brands.Where(x => x.name == BrandsComboBox.SelectedItem?.ToString())
+                product.warranty = brands.Where(x => x.name == BrandsComboBox.SelectedItem?.ToString())
                                         .Select(x => x.warranty)
                                         .FirstOrDefault();
                 product.iva = Convert.ToDecimal(ProductIvaBar.Content);
@@ -177,6 +162,28 @@ namespace ChozaGamer.Presentation
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        private void CategoriesComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SubCategoriesComboBox.Items.Clear();
+
+            var selectedCategory = CategoriesComboBox.SelectedItem?.ToString();
+
+            if (selectedCategory != null)
+            {
+                var categoryId = categories.FirstOrDefault(x => x.name == selectedCategory)?.id;
+
+                if (categoryId.HasValue)
+                {
+                    var filteredSubCategories = subCategories
+                        .Where(x => x.idCategory == categoryId)
+                        .Select(x => x.name)
+                        .ToArray();
+
+                    SubCategoriesComboBox.Items.AddRange(filteredSubCategories);
+                }
             }
         }
     }

@@ -15,6 +15,7 @@ namespace ChozaGamer.Presentation
     public partial class ProductCard : UserControl
     {
         private readonly SearchProductDTO product;
+        public event EventHandler ViewProduct;
 
         public ProductCard(SearchProductDTO product)
         {
@@ -67,6 +68,11 @@ namespace ChozaGamer.Presentation
         private void ProductCardImage_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void ProductCardButton_Click(object sender, EventArgs e)
+        {
+            ViewProduct?.Invoke(this, EventArgs.Empty);
         }
     }
 }

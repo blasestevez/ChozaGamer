@@ -49,6 +49,12 @@ namespace ChozaGamer.Presentation
                 productCard.Margin = new Padding(0, 0, 0, 10);
 
                 flowLayoutPanel1.Controls.Add(productCard);
+
+                productCard.ViewProduct += (s, e) =>
+                {
+                    ViewProduct viewProduct = new ViewProduct(product, productService);
+                    viewProduct.Show();
+                };
             }
         }
         private void ProfileButton_Click(object sender, EventArgs e)
@@ -109,6 +115,7 @@ namespace ChozaGamer.Presentation
                 loginForm.Show();
             }
             this.Hide();
+            this.Dispose();
         }
     }
 }

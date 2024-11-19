@@ -31,7 +31,6 @@
             ProductCardImage = new PictureBox();
             ProductCardProdName = new Label();
             ProductCardProdPrice = new Label();
-            ProductCardButton = new CuoreUI.Controls.cuiButton();
             EditProductButton = new CuoreUI.Controls.cuiButton();
             cuiBorder1 = new CuoreUI.Controls.cuiBorder();
             DeleteButton = new CuoreUI.Controls.cuiButton();
@@ -71,40 +70,6 @@
             ProductCardProdPrice.Size = new Size(147, 28);
             ProductCardProdPrice.TabIndex = 4;
             ProductCardProdPrice.Text = "$pruebaprueba";
-            // 
-            // ProductCardButton
-            // 
-            ProductCardButton.BackColor = Color.White;
-            ProductCardButton.CheckButton = false;
-            ProductCardButton.Checked = false;
-            ProductCardButton.CheckedBackground = Color.FromArgb(255, 106, 0);
-            ProductCardButton.CheckedImageTint = Color.White;
-            ProductCardButton.CheckedOutline = Color.FromArgb(255, 106, 0);
-            ProductCardButton.Content = "Ver Producto";
-            ProductCardButton.Cursor = Cursors.Hand;
-            ProductCardButton.DialogResult = DialogResult.None;
-            ProductCardButton.Font = new Font("Microsoft Sans Serif", 11F);
-            ProductCardButton.ForeColor = Color.White;
-            ProductCardButton.HoverBackground = Color.FromArgb(240, 50, 10);
-            ProductCardButton.HoveredImageTint = Color.White;
-            ProductCardButton.HoverOutline = Color.Empty;
-            ProductCardButton.Image = Properties.Resources.CartIcon;
-            ProductCardButton.ImageAutoCenter = true;
-            ProductCardButton.ImageExpand = new Point(5, 5);
-            ProductCardButton.ImageOffset = new Point(-5, 0);
-            ProductCardButton.ImageTint = Color.White;
-            ProductCardButton.Location = new Point(572, 147);
-            ProductCardButton.Name = "ProductCardButton";
-            ProductCardButton.NormalBackground = Color.FromArgb(240, 50, 10);
-            ProductCardButton.NormalOutline = Color.Empty;
-            ProductCardButton.OutlineThickness = 1.6F;
-            ProductCardButton.PressedBackground = Color.FromArgb(240, 50, 10);
-            ProductCardButton.PressedImageTint = Color.White;
-            ProductCardButton.PressedOutline = Color.Empty;
-            ProductCardButton.Rounding = new Padding(8);
-            ProductCardButton.Size = new Size(145, 37);
-            ProductCardButton.TabIndex = 5;
-            ProductCardButton.TextOffset = new Point(0, 0);
             // 
             // EditProductButton
             // 
@@ -196,7 +161,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Transparent;
             Controls.Add(EditProductButton);
-            Controls.Add(ProductCardButton);
             Controls.Add(ProductCardProdPrice);
             Controls.Add(ProductCardProdName);
             Controls.Add(ProductCardImage);
@@ -214,7 +178,6 @@
         private PictureBox ProductCardImage;
         private Label ProductCardProdName;
         private Label ProductCardProdPrice;
-        private CuoreUI.Controls.cuiButton ProductCardButton;
         private CuoreUI.Controls.cuiButton EditProductButton;
         private CuoreUI.Controls.cuiBorder cuiBorder1;
         private CuoreUI.Controls.cuiButton DeleteButton;

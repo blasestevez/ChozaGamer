@@ -39,7 +39,9 @@
             ProductDefaultPriceBar = new CuoreUI.Controls.cuiTextBox2();
             ProductDescriptionBar = new CuoreUI.Controls.cuiTextBox2();
             NameBar = new CuoreUI.Controls.cuiTextBox2();
-            BrandsComboBox = new CuoreUI.Controls.cuiComboBox();
+            BrandsComboBox = new ComboBox();
+            CategoriesComboBox = new ComboBox();
+            SubCategoriesComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -80,9 +82,11 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Center;
             pictureBox1.Location = new Point(27, 21);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(250, 250);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 23;
             pictureBox1.TabStop = false;
             // 
@@ -301,31 +305,36 @@
             // 
             // BrandsComboBox
             // 
-            BrandsComboBox.BackgroundColor = Color.FromArgb(10, 10, 10);
-            BrandsComboBox.ButtonHoverBackground = Color.FromArgb(200, 255, 106, 0);
-            BrandsComboBox.ButtonHoverOutline = Color.FromArgb(255, 106, 0);
-            BrandsComboBox.ButtonNormalBackground = Color.FromArgb(255, 106, 0);
-            BrandsComboBox.ButtonNormalOutline = Color.FromArgb(255, 106, 0);
-            BrandsComboBox.ButtonPressedBackground = Color.FromArgb(255, 106, 0);
-            BrandsComboBox.ButtonPressedOutline = Color.FromArgb(255, 106, 0);
-            BrandsComboBox.DropDownBackgroundColor = Color.FromArgb(14, 14, 14);
-            BrandsComboBox.DropDownOutlineColor = Color.FromArgb(30, 255, 255, 255);
-            BrandsComboBox.ExpandArrowColor = Color.White;
-            BrandsComboBox.ForeColor = SystemColors.Control;
-            BrandsComboBox.Location = new Point(557, 21);
-            BrandsComboBox.Margin = new Padding(4, 3, 4, 3);
+            BrandsComboBox.FormattingEnabled = true;
+            BrandsComboBox.Location = new Point(566, 32);
             BrandsComboBox.Name = "BrandsComboBox";
-            BrandsComboBox.OutlineColor = Color.FromArgb(35, 255, 255, 255);
-            BrandsComboBox.OutlineThickness = 1F;
-            BrandsComboBox.Rounding = 0;
-            BrandsComboBox.Size = new Size(197, 52);
+            BrandsComboBox.Size = new Size(121, 23);
             BrandsComboBox.TabIndex = 25;
+            // 
+            // CategoriesComboBox
+            // 
+            CategoriesComboBox.FormattingEnabled = true;
+            CategoriesComboBox.Location = new Point(566, 85);
+            CategoriesComboBox.Name = "CategoriesComboBox";
+            CategoriesComboBox.Size = new Size(121, 23);
+            CategoriesComboBox.TabIndex = 26;
+            CategoriesComboBox.SelectedIndexChanged += CategoriesComboBox_SelectedIndexChanged;
+            // 
+            // SubCategoriesComboBox
+            // 
+            SubCategoriesComboBox.FormattingEnabled = true;
+            SubCategoriesComboBox.Location = new Point(566, 141);
+            SubCategoriesComboBox.Name = "SubCategoriesComboBox";
+            SubCategoriesComboBox.Size = new Size(121, 23);
+            SubCategoriesComboBox.TabIndex = 27;
             // 
             // AddProductForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(784, 561);
+            Controls.Add(SubCategoriesComboBox);
+            Controls.Add(CategoriesComboBox);
             Controls.Add(BrandsComboBox);
             Controls.Add(ChangeProductImageButton);
             Controls.Add(pictureBox1);
@@ -358,6 +367,8 @@
         private CuoreUI.Controls.cuiTextBox2 ProductDefaultPriceBar;
         private CuoreUI.Controls.cuiTextBox2 ProductDescriptionBar;
         private CuoreUI.Controls.cuiTextBox2 NameBar;
-        private CuoreUI.Controls.cuiComboBox BrandsComboBox;
+        private ComboBox BrandsComboBox;
+        private ComboBox CategoriesComboBox;
+        private ComboBox SubCategoriesComboBox;
     }
 }

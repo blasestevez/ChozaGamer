@@ -103,6 +103,7 @@
             ProductCardButton.Size = new Size(145, 37);
             ProductCardButton.TabIndex = 4;
             ProductCardButton.TextOffset = new Point(0, 0);
+            ProductCardButton.Click += ProductCardButton_Click;
             // 
             // cuiBorder1
             // 
