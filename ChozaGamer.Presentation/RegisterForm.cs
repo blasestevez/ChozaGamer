@@ -16,12 +16,18 @@ namespace ChozaGamer.Presentation
     {
         private readonly ProductService productService;
         private readonly UserService userService;
+        private readonly BrandService brandService;
+        private readonly CategoryService categoryService;
+        private readonly SubCategoryService subCategoryService;
 
-        public RegisterForm(ProductService productService, UserService userService)
+        public RegisterForm(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService)
         {
             InitializeComponent();
             this.productService = productService;
             this.userService = userService;
+            this.brandService = brandService;
+            this.categoryService = categoryService;
+            this.subCategoryService = subCategoryService;
         }
 
         private void MinimizeButton_Click(object sender, EventArgs e)
@@ -72,7 +78,7 @@ namespace ChozaGamer.Presentation
             }
             else
             {
-                LoginForm loginForm = new LoginForm(productService, userService);
+                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService);
                 loginForm.Show();
             }
             this.Hide();
@@ -88,7 +94,7 @@ namespace ChozaGamer.Presentation
             }
             else
             {
-                LoginForm loginForm = new LoginForm(productService, userService);
+                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService);
                 loginForm.Show();
             }
             this.Hide();

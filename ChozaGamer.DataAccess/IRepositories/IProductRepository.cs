@@ -13,7 +13,8 @@ namespace ChozaGamer.DataAccess.IRepositories
         Task<List<SearchProductDTO>> GetProductsAsync();
         Task<List<SearchProductDTO>> GetProductsByCategoryAsync(string search, int idCategory);
         Task<List<SearchProductDTO>> GetProductsBySubCategoryAsync(string search, int idSubCategory);
-        Task<bool> UploadProductAsync(ProductDTO product);
+        Task<bool> UploadProductAsync(SearchProductDTO product);
         Task<bool> UpdateProductAsync(SearchProductDTO product);
+        Task<bool> DeleteProductAsync(int idProduct);
     }
 }

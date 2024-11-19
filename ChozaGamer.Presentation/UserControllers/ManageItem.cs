@@ -20,8 +20,13 @@ namespace ChozaGamer.Presentation
         private readonly CategoryDTO? category;
         private readonly SubCategoryDTO? subCategory;
         private readonly ProductService productService;
+        private readonly BrandService brandService;
+        private readonly CategoryService categoryService;
+        private readonly SubCategoryService subCategoryService;
 
-        public ManageItem(SearchProductDTO? product, BrandDTO? brand, CategoryDTO? category, SubCategoryDTO? subCategory, ProductService productService)
+        public event EventHandler CloseButtonClicked;
+
+        public ManageItem(SearchProductDTO? product, BrandDTO? brand, CategoryDTO? category, SubCategoryDTO? subCategory, ProductService productService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService)
         {
             InitializeComponent();
             this.product = product;
@@ -29,22 +34,14 @@ namespace ChozaGamer.Presentation
             this.category = category;
             this.subCategory = subCategory;
             this.productService = productService;
+            this.brandService = brandService;
+            this.categoryService = categoryService;
+            this.subCategoryService = subCategoryService;
             CheckItem();
         }
 
         private void CheckItem()
         {
-            if (brand != null || category != null || subCategory != null)
-            {
-                ProductDescriptionBar.Hide();
-                ProductDefaultPriceBar.Hide();
-                ProductSpecialPriceBar.Hide();
-                ProductStockBar.Hide();
-                ProductCodeBar.Hide();
-                ProductWarrantyBar.Hide();
-                ProductIvaBar.Hide();
-                ProductSaleCheckBox.Hide();
-            }
             if (product != null)
             {
                 NameBar.Content = product.name;
@@ -59,7 +56,53 @@ namespace ChozaGamer.Presentation
 
                 pictureBox1.Image = ConvertByteToImage(product.productImage);
             }
+
+            if (brand != null)
+            {
+                ProductDescriptionBar.Hide();
+                ProductDefaultPriceBar.Hide();
+                ProductSpecialPriceBar.Hide();
+                ProductStockBar.Hide();
+                ProductCodeBar.Hide();
+                ProductIvaBar.Hide();
+                ProductSaleCheckBox.Hide();
+                ChangeProductImageButton.Hide();
+
+                NameBar.Content = brand.name;
+                ProductWarrantyBar.Content = brand.warranty.ToString();
+            }
+
+            if (category != null)
+            {
+                ProductDescriptionBar.Hide();
+                ProductDefaultPriceBar.Hide();
+                ProductSpecialPriceBar.Hide();
+                ProductStockBar.Hide();
+                ProductCodeBar.Hide();
+                ProductWarrantyBar.Hide();
+                ProductIvaBar.Hide();
+                ProductSaleCheckBox.Hide();
+                ChangeProductImageButton.Hide();
+
+                NameBar.Content = category.name;
+            }
+
+            if (subCategory != null)
+            {
+                ProductDescriptionBar.Hide();
+                ProductDefaultPriceBar.Hide();
+                ProductSpecialPriceBar.Hide();
+                ProductStockBar.Hide();
+                ProductCodeBar.Hide();
+                ProductWarrantyBar.Hide();
+                ProductIvaBar.Hide();
+                ProductSaleCheckBox.Hide();
+                ChangeProductImageButton.Hide();
+
+                NameBar.Content = subCategory.name;
+            }
         }
+
         private void ChangeProductImageButton_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -146,9 +189,9 @@ namespace ChozaGamer.Presentation
                     product.sale = ProductSaleCheckBox.Checked;
                     product.productImage = ConvertImageToByte(pictureBox1.Image);
 
-                    var response = await productService.UpdateProduct(product);
+                    var productResponse = await productService.UpdateProduct(product);
 
-                    if (response)
+                    if (productResponse)
                     {
                         MessageBox.Show("Product updated successfully.");
                         ProductUpdated?.Invoke(this, EventArgs.Empty);
@@ -163,6 +206,86 @@ namespace ChozaGamer.Presentation
                     throw;
                 }
             }
+
+            if (brand != null)
+            {
+                try
+                {
+                    brand.name = NameBar.Content;
+                    brand.warranty = Convert.ToInt32(ProductWarrantyBar.Content);
+
+                    var brandResponse = await brandService.UpdateBrand(brand);
+
+                    if (brandResponse)
+                    {
+                        MessageBox.Show("Brand updated successfully.");
+                        ProductUpdated?.Invoke(this, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error updating brand.");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            if (category != null)
+            {
+                try
+                {
+                    category.name = NameBar.Content;
+                    var categoryResponse = await categoryService.UpdateCategory(category);
+                    if (categoryResponse)
+                    {
+                        MessageBox.Show("Category updated successfully.");
+                        ProductUpdated?.Invoke(this, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error updating category.");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            if (subCategory != null)
+            {
+                try
+                {
+                    subCategory.name = NameBar.Content;
+                    var subCategoryResponse = await subCategoryService.UpdateSubCategory(subCategory);
+                    if (subCategoryResponse)
+                    {
+                        MessageBox.Show("Subcategory updated successfully.");
+                        ProductUpdated?.Invoke(this, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error updating subcategory.");
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+        }
+
+        private void ManageItem_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            CloseButtonClicked?.Invoke(this, EventArgs.Empty);
+            this.Dispose();
         }
     }
 }

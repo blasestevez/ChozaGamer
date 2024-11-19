@@ -40,6 +40,7 @@
             ConfirmButton = new CuoreUI.Controls.cuiButton();
             pictureBox1 = new PictureBox();
             ChangeProductImageButton = new CuoreUI.Controls.cuiButton();
+            CloseButton = new CuoreUI.Controls.cuiButton();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -323,10 +324,46 @@
             ChangeProductImageButton.TextOffset = new Point(0, 0);
             ChangeProductImageButton.Click += ChangeProductImageButton_Click;
             // 
+            // CloseButton
+            // 
+            CloseButton.BackgroundImageLayout = ImageLayout.None;
+            CloseButton.CheckButton = false;
+            CloseButton.Checked = false;
+            CloseButton.CheckedBackground = Color.FromArgb(33, 33, 33);
+            CloseButton.CheckedImageTint = Color.White;
+            CloseButton.CheckedOutline = Color.FromArgb(33, 33, 33);
+            CloseButton.Content = "";
+            CloseButton.Cursor = Cursors.Hand;
+            CloseButton.DialogResult = DialogResult.None;
+            CloseButton.Font = new Font("Microsoft Sans Serif", 9.75F);
+            CloseButton.ForeColor = Color.White;
+            CloseButton.HoverBackground = Color.FromArgb(240, 50, 10);
+            CloseButton.HoveredImageTint = Color.FromArgb(33, 33, 33);
+            CloseButton.HoverOutline = Color.Empty;
+            CloseButton.Image = Properties.Resources.CloseIcon;
+            CloseButton.ImageAutoCenter = true;
+            CloseButton.ImageExpand = new Point(7, 7);
+            CloseButton.ImageOffset = new Point(0, 0);
+            CloseButton.ImageTint = Color.White;
+            CloseButton.Location = new Point(726, 18);
+            CloseButton.Name = "CloseButton";
+            CloseButton.NormalBackground = Color.FromArgb(33, 33, 33);
+            CloseButton.NormalOutline = Color.Empty;
+            CloseButton.OutlineThickness = 1.6F;
+            CloseButton.PressedBackground = Color.FromArgb(72, 72, 72);
+            CloseButton.PressedImageTint = Color.White;
+            CloseButton.PressedOutline = Color.Empty;
+            CloseButton.Rounding = new Padding(8);
+            CloseButton.Size = new Size(45, 45);
+            CloseButton.TabIndex = 13;
+            CloseButton.TextOffset = new Point(0, 0);
+            CloseButton.Click += CloseButton_Click;
+            // 
             // ManageItem
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(CloseButton);
             Controls.Add(ChangeProductImageButton);
             Controls.Add(pictureBox1);
             Controls.Add(ConfirmButton);
@@ -341,6 +378,7 @@
             Controls.Add(NameBar);
             Name = "ManageItem";
             Size = new Size(800, 600);
+            Load += ManageItem_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -360,5 +398,6 @@
         private CuoreUI.Controls.cuiButton ConfirmButton;
         private PictureBox pictureBox1;
         private CuoreUI.Controls.cuiButton ChangeProductImageButton;
+        private CuoreUI.Controls.cuiButton CloseButton;
     }
 }

@@ -21,6 +21,20 @@ namespace ChozaGamer.DataAccess.Repositories
             this.dbContext = dbContext;
             this.mapper = mapper;
         }
+
+        public async Task<bool> DeleteProductAsync(int idProduct)
+        {
+            var productEntity = await dbContext.Products.FindAsync(idProduct);
+
+            if (productEntity == null)
+            {
+                return false;
+            }
+            dbContext.Products.Remove(productEntity);
+            await dbContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<List<SearchProductDTO>> GetProductsAsync()
         {
             var products = await dbContext.Products
@@ -71,9 +85,9 @@ namespace ChozaGamer.DataAccess.Repositories
             return true;
         }
 
-        public async Task<bool> UploadProductAsync(ProductDTO productDTO)
+        public async Task<bool> UploadProductAsync(SearchProductDTO productDTO)
         {
-            var productEntity = mapper.Map<Product>(productDTO);
+            var productEntity = mapper.Map<Product>(productDTO) ;
 
             await dbContext.Products.AddAsync(productEntity);
             await dbContext.SaveChangesAsync();

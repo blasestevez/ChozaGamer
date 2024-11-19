@@ -36,12 +36,12 @@
             Logo = new CuoreUI.Controls.cuiPictureBox();
             ProfileButton = new CuoreUI.Controls.cuiButton();
             openFileDialog1 = new OpenFileDialog();
-            flowLayoutPanel1 = new FlowLayoutPanel();
+            ItemsPanel = new FlowLayoutPanel();
             ManageProductsButton = new CuoreUI.Controls.cuiButton();
             ManageBrandsButton = new CuoreUI.Controls.cuiButton();
             ManageCategoriesButton = new CuoreUI.Controls.cuiButton();
             ManagesSubcategoriesButton = new CuoreUI.Controls.cuiButton();
-            ManageProductPanel = new FlowLayoutPanel();
+            ManageItemPanel = new FlowLayoutPanel();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -226,13 +226,13 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
-            // flowLayoutPanel1
+            // ItemsPanel
             // 
-            flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Location = new Point(350, 155);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(867, 501);
-            flowLayoutPanel1.TabIndex = 2;
+            ItemsPanel.AutoScroll = true;
+            ItemsPanel.Location = new Point(350, 155);
+            ItemsPanel.Name = "ItemsPanel";
+            ItemsPanel.Size = new Size(867, 501);
+            ItemsPanel.TabIndex = 2;
             // 
             // ManageProductsButton
             // 
@@ -302,6 +302,7 @@
             ManageBrandsButton.Size = new Size(183, 45);
             ManageBrandsButton.TabIndex = 11;
             ManageBrandsButton.TextOffset = new Point(0, 0);
+            ManageBrandsButton.Click += ManageBrandsButton_Click;
             // 
             // ManageCategoriesButton
             // 
@@ -336,6 +337,7 @@
             ManageCategoriesButton.Size = new Size(183, 45);
             ManageCategoriesButton.TabIndex = 12;
             ManageCategoriesButton.TextOffset = new Point(0, 0);
+            ManageCategoriesButton.Click += ManageCategoriesButton_Click;
             // 
             // ManagesSubcategoriesButton
             // 
@@ -370,26 +372,27 @@
             ManagesSubcategoriesButton.Size = new Size(183, 45);
             ManagesSubcategoriesButton.TabIndex = 13;
             ManagesSubcategoriesButton.TextOffset = new Point(0, 0);
+            ManagesSubcategoriesButton.Click += ManagesSubcategoriesButton_Click;
             // 
-            // ManageProductPanel
+            // ManageItemPanel
             // 
-            ManageProductPanel.AutoScroll = true;
-            ManageProductPanel.Location = new Point(350, 108);
-            ManageProductPanel.Name = "ManageProductPanel";
-            ManageProductPanel.Size = new Size(800, 600);
-            ManageProductPanel.TabIndex = 3;
+            ManageItemPanel.AutoScroll = true;
+            ManageItemPanel.Location = new Point(350, 108);
+            ManageItemPanel.Name = "ManageItemPanel";
+            ManageItemPanel.Size = new Size(800, 600);
+            ManageItemPanel.TabIndex = 3;
             // 
             // AdminPanel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1280, 720);
-            Controls.Add(ManageProductPanel);
+            Controls.Add(ManageItemPanel);
             Controls.Add(ManagesSubcategoriesButton);
             Controls.Add(ManageCategoriesButton);
             Controls.Add(ManageBrandsButton);
             Controls.Add(ManageProductsButton);
-            Controls.Add(flowLayoutPanel1);
+            Controls.Add(ItemsPanel);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "AdminPanel";
@@ -408,11 +411,11 @@
         private CuoreUI.Controls.cuiLabel AdminPanelTitle;
         private OpenFileDialog openFileDialog1;
         private CuoreUI.Controls.cuiButton LogoutButton;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel ItemsPanel;
         private CuoreUI.Controls.cuiButton ManageProductsButton;
         private CuoreUI.Controls.cuiButton ManageBrandsButton;
         private CuoreUI.Controls.cuiButton ManageCategoriesButton;
         private CuoreUI.Controls.cuiButton ManagesSubcategoriesButton;
-        private FlowLayoutPanel ManageProductPanel;
+        private FlowLayoutPanel ManageItemPanel;
     }
 }

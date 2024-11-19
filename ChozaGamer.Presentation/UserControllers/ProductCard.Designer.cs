@@ -1,16 +1,16 @@
 ﻿namespace ChozaGamer.Presentation
 {
-    partial class SelectableProductCard
+    partial class ProductCard
     {
         /// <summary> 
-        /// Variable del diseñador necesaria.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
-        /// Limpiar los recursos que se estén usando.
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Código generado por el Diseñador de componentes
+        #region Component Designer generated code
 
         /// <summary> 
-        /// Método necesario para admitir el Diseñador. No se puede modificar
-        /// el contenido de este método con el editor de código.
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -32,41 +32,47 @@
             ProductCardProdName = new Label();
             ProductCardProdPrice = new Label();
             ProductCardButton = new CuoreUI.Controls.cuiButton();
-            checkBox1 = new CheckBox();
+            cuiBorder1 = new CuoreUI.Controls.cuiBorder();
             ((System.ComponentModel.ISupportInitialize)ProductCardImage).BeginInit();
             SuspendLayout();
             // 
             // ProductCardImage
             // 
+            ProductCardImage.BackColor = Color.White;
             ProductCardImage.BackgroundImageLayout = ImageLayout.Center;
-            ProductCardImage.Location = new Point(72, 25);
+            ProductCardImage.Location = new Point(25, 25);
             ProductCardImage.Name = "ProductCardImage";
             ProductCardImage.Size = new Size(150, 150);
-            ProductCardImage.TabIndex = 1;
+            ProductCardImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            ProductCardImage.TabIndex = 0;
             ProductCardImage.TabStop = false;
+            ProductCardImage.Click += ProductCardImage_Click;
             // 
             // ProductCardProdName
             // 
             ProductCardProdName.AutoSize = true;
+            ProductCardProdName.BackColor = Color.White;
             ProductCardProdName.Font = new Font("Segoe UI", 15F);
-            ProductCardProdName.Location = new Point(246, 25);
+            ProductCardProdName.Location = new Point(199, 25);
             ProductCardProdName.Name = "ProductCardProdName";
             ProductCardProdName.Size = new Size(384, 28);
-            ProductCardProdName.TabIndex = 3;
+            ProductCardProdName.TabIndex = 2;
             ProductCardProdName.Text = "pruebapruebapruebapruebapruebaprueba";
             // 
             // ProductCardProdPrice
             // 
             ProductCardProdPrice.AutoSize = true;
+            ProductCardProdPrice.BackColor = Color.White;
             ProductCardProdPrice.Font = new Font("Segoe UI", 15F);
-            ProductCardProdPrice.Location = new Point(246, 147);
+            ProductCardProdPrice.Location = new Point(199, 147);
             ProductCardProdPrice.Name = "ProductCardProdPrice";
             ProductCardProdPrice.Size = new Size(147, 28);
-            ProductCardProdPrice.TabIndex = 4;
+            ProductCardProdPrice.TabIndex = 3;
             ProductCardProdPrice.Text = "$pruebaprueba";
             // 
             // ProductCardButton
             // 
+            ProductCardButton.BackColor = Color.White;
             ProductCardButton.CheckButton = false;
             ProductCardButton.Checked = false;
             ProductCardButton.CheckedBackground = Color.FromArgb(255, 106, 0);
@@ -85,7 +91,7 @@
             ProductCardButton.ImageExpand = new Point(5, 5);
             ProductCardButton.ImageOffset = new Point(-5, 0);
             ProductCardButton.ImageTint = Color.White;
-            ProductCardButton.Location = new Point(572, 147);
+            ProductCardButton.Location = new Point(588, 147);
             ProductCardButton.Name = "ProductCardButton";
             ProductCardButton.NormalBackground = Color.FromArgb(240, 50, 10);
             ProductCardButton.NormalOutline = Color.Empty;
@@ -95,30 +101,33 @@
             ProductCardButton.PressedOutline = Color.Empty;
             ProductCardButton.Rounding = new Padding(8);
             ProductCardButton.Size = new Size(145, 37);
-            ProductCardButton.TabIndex = 5;
+            ProductCardButton.TabIndex = 4;
             ProductCardButton.TextOffset = new Point(0, 0);
             // 
-            // checkBox1
+            // cuiBorder1
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(27, 93);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(15, 14);
-            checkBox1.TabIndex = 6;
-            checkBox1.UseVisualStyleBackColor = true;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            cuiBorder1.BackColor = Color.Transparent;
+            cuiBorder1.ForeColor = Color.White;
+            cuiBorder1.Location = new Point(3, 3);
+            cuiBorder1.Name = "cuiBorder1";
+            cuiBorder1.OutlineThickness = 1F;
+            cuiBorder1.PanelColor = Color.White;
+            cuiBorder1.PanelOutlineColor = Color.White;
+            cuiBorder1.Rounding = new Padding(8);
+            cuiBorder1.Size = new Size(794, 194);
+            cuiBorder1.TabIndex = 8;
             // 
-            // SelectableProductCard
+            // ProductCard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
-            Controls.Add(checkBox1);
+            BackColor = Color.Transparent;
             Controls.Add(ProductCardButton);
             Controls.Add(ProductCardProdPrice);
             Controls.Add(ProductCardProdName);
             Controls.Add(ProductCardImage);
-            Name = "SelectableProductCard";
+            Controls.Add(cuiBorder1);
+            Name = "ProductCard";
             Size = new Size(800, 200);
             ((System.ComponentModel.ISupportInitialize)ProductCardImage).EndInit();
             ResumeLayout(false);
@@ -131,6 +140,6 @@
         private Label ProductCardProdName;
         private Label ProductCardProdPrice;
         private CuoreUI.Controls.cuiButton ProductCardButton;
-        private CheckBox checkBox1;
+        private CuoreUI.Controls.cuiBorder cuiBorder1;
     }
 }

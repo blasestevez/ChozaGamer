@@ -16,12 +16,18 @@ namespace ChozaGamer.Presentation
     {
         private readonly ProductService productService;
         private readonly UserService userService;
+        private readonly BrandService brandService;
+        private readonly CategoryService categoryService;
+        private readonly SubCategoryService subCategoryService;
 
-        public LoginForm(ProductService productService, UserService userService)
+        public LoginForm(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService)
         {
             InitializeComponent();
             this.productService = productService;
             this.userService = userService;
+            this.brandService = brandService;
+            this.categoryService = categoryService;
+            this.subCategoryService = subCategoryService;
         }
 
         private void MinimizeButton_Click(object sender, EventArgs e)
@@ -44,7 +50,7 @@ namespace ChozaGamer.Presentation
             }
             else
             {
-                RegisterForm registerForm = new RegisterForm(productService, userService);
+                RegisterForm registerForm = new RegisterForm(productService, userService, brandService, categoryService, subCategoryService);
                 registerForm.Show();
             }
             this.Hide();
@@ -78,7 +84,7 @@ namespace ChozaGamer.Presentation
                     }
                     else
                     {
-                        AdminPanel adminPanel = new AdminPanel(productService, userService);
+                        AdminPanel adminPanel = new AdminPanel(productService, userService, brandService, categoryService, subCategoryService);
                         adminPanel.Show();
                     }
                 }
@@ -92,7 +98,7 @@ namespace ChozaGamer.Presentation
                     }
                     else
                     {
-                        ProductBrowser productBrowser = new ProductBrowser(productService, userService);
+                        ProductBrowser productBrowser = new ProductBrowser(productService, userService, brandService, categoryService, subCategoryService);
                         productBrowser.Show();
                     }
                 }

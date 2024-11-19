@@ -21,7 +21,7 @@ namespace ChozaGamer.Presentation
             var services = new ServiceCollection();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer("Server=PC93\\SQLEXPRESS;Database=ChozaGamer;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"));
+                options.UseSqlServer("Server=DESKTOP-JSV8JHV;Database=ChozaGamer;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"));
             
             services.AddAutoMapper(typeof(AutoMapperProfiles));
 
@@ -29,6 +29,12 @@ namespace ChozaGamer.Presentation
             services.AddScoped<ProductRepository>();
             services.AddScoped<UserService>();
             services.AddScoped<UserRepository>();
+            services.AddScoped<BrandService>();
+            services.AddScoped<BrandRepository>();
+            services.AddScoped<CategoryService>();
+            services.AddScoped<CategoryRepository>();
+            services.AddScoped<SubCategoryService>();
+            services.AddScoped<SubCategoryRepository>();
 
             services.AddSingleton<LoginForm>();
             var serviceProvider = services.BuildServiceProvider();

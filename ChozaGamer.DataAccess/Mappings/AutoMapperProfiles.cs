@@ -46,6 +46,17 @@ namespace ChozaGamer.DataAccess.Mappings
                 .ForMember(dest => dest.stock, opt => opt.Ignore())
                 .ForMember(dest => dest.warranty, opt => opt.Ignore());
 
+            CreateMap<Brand, BrandDTO>()
+                .ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Products))
+                .ReverseMap();
+
+            CreateMap<Category, CategoryDTO>()
+                .ForMember(dest => dest.SubCategories, opt => opt.MapFrom(src => src.SubCategories))
+                .ReverseMap();
+
+            CreateMap<SubCategory, SubCategoryDTO>()
+                .ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Products))
+                .ReverseMap();
 
         }
     }

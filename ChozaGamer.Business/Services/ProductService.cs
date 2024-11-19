@@ -35,7 +35,7 @@ namespace ChozaGamer.Business.Services
             return response;
         }
 
-        public async Task<bool> UploadProduct(ProductDTO product)
+        public async Task<bool> UploadProduct(SearchProductDTO product)
         {
             var response = await repository.UploadProductAsync(product);
             return response;
@@ -44,6 +44,12 @@ namespace ChozaGamer.Business.Services
         public async Task<bool> UpdateProduct(SearchProductDTO product)
         {
             var response = await repository.UpdateProductAsync(product);
+            return response;
+        }
+
+        public async Task<bool> DeleteProduct(int idProduct)
+        {
+            var response = await repository.DeleteProductAsync(idProduct);
             return response;
         }
     }

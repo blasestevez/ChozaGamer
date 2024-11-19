@@ -11,28 +11,18 @@ using System.Windows.Forms;
 
 namespace ChozaGamer.Presentation
 {
-    public partial class SelectableProductCard : UserControl
+    public partial class EditableProductCard : UserControl
     {
         private readonly SearchProductDTO product;
-        private bool isSelected;
-
-        public SelectableProductCard(SearchProductDTO product, bool isSelected)
+        public event EventHandler EditButtonClicked;
+        public event EventHandler DeleteButtonClicked;
+        public EditableProductCard(SearchProductDTO product)
         {
             InitializeComponent();
             this.product = product;
-            this.isSelected = isSelected;
             productName = product.name;
             productPrice = "$" + product.defaultPrice.ToString();
             productImage = ConvertByteToImage(product.productImage);
-        }
-
-        private bool isSelected()
-        {
-            if (true)
-            {
-
-            }
-            return isSelected;
         }
         public string productName
         {
@@ -72,16 +62,14 @@ namespace ChozaGamer.Presentation
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void EditProductButton_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
-            {
-                isSelected = true;
-            }
-            else
-            {
-                 isSelected = false;
-            }
+            EditButtonClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            DeleteButtonClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }
