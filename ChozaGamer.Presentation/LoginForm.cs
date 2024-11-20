@@ -1,5 +1,6 @@
 ﻿using ChozaGamer.Business.Services;
 using ChozaGamer.DataAccess.Models.DTOs;
+using ChozaGamer.Presentation.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,8 +20,9 @@ namespace ChozaGamer.Presentation
         private readonly BrandService brandService;
         private readonly CategoryService categoryService;
         private readonly SubCategoryService subCategoryService;
+        private readonly InvoiceService invoiceService;
 
-        public LoginForm(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService)
+        public LoginForm(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService, InvoiceService invoiceService)
         {
             InitializeComponent();
             this.productService = productService;
@@ -28,6 +30,7 @@ namespace ChozaGamer.Presentation
             this.brandService = brandService;
             this.categoryService = categoryService;
             this.subCategoryService = subCategoryService;
+            this.invoiceService = invoiceService;
         }
 
         private void MinimizeButton_Click(object sender, EventArgs e)
@@ -50,7 +53,7 @@ namespace ChozaGamer.Presentation
             }
             else
             {
-                RegisterForm registerForm = new RegisterForm(productService, userService, brandService, categoryService, subCategoryService);
+                RegisterForm registerForm = new RegisterForm(productService, userService, brandService, categoryService, subCategoryService, invoiceService);
                 registerForm.Show();
             }
             this.Hide();
@@ -72,8 +75,11 @@ namespace ChozaGamer.Presentation
             }
             else
             {
-                MessageBox.Show("User logged in successfully.");
                 var user = await userService.GetUserByUsernameAsync(loginUserDTO.username);
+                UserSession.userId = user.id;
+                UserSession.username = user.username;
+                UserSession.userType = user.userType;
+                MessageBox.Show("User logged in successfully.");
                 if (user.userType)
                 {
                     AdminPanel existingAdminPanelForm = Application.OpenForms.OfType<AdminPanel>().FirstOrDefault();
@@ -84,7 +90,7 @@ namespace ChozaGamer.Presentation
                     }
                     else
                     {
-                        AdminPanel adminPanel = new AdminPanel(productService, userService, brandService, categoryService, subCategoryService);
+                        AdminPanel adminPanel = new AdminPanel(productService, userService, brandService, categoryService, subCategoryService, invoiceService);
                         adminPanel.Show();
                     }
                 }
@@ -98,7 +104,7 @@ namespace ChozaGamer.Presentation
                     }
                     else
                     {
-                        ProductBrowser productBrowser = new ProductBrowser(productService, userService, brandService, categoryService, subCategoryService);
+                        ProductBrowser productBrowser = new ProductBrowser(productService, userService, brandService, categoryService, subCategoryService, invoiceService);
                         productBrowser.Show();
                     }
                 }

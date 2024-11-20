@@ -1,5 +1,6 @@
 using ChozaGamer.Business.Services;
 using ChozaGamer.DataAccess.Models.DTOs;
+using ChozaGamer.Presentation.Utils;
 using Microsoft.VisualBasic.ApplicationServices;
 
 namespace ChozaGamer.Presentation
@@ -11,9 +12,10 @@ namespace ChozaGamer.Presentation
         private readonly BrandService brandService;
         private readonly CategoryService categoryService;
         private readonly SubCategoryService subCategoryService;
+        private readonly InvoiceService invoiceService;
         private List<SearchProductDTO> products;
 
-        public ProductBrowser(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService)
+        public ProductBrowser(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService, InvoiceService invoiceService)
         {
             InitializeComponent();
             this.productService = productService;
@@ -21,6 +23,7 @@ namespace ChozaGamer.Presentation
             this.brandService = brandService;
             this.categoryService = categoryService;
             this.subCategoryService = subCategoryService;
+            this.invoiceService = invoiceService;
             LoadProducts();
         }
 
@@ -52,7 +55,7 @@ namespace ChozaGamer.Presentation
 
                 productCard.ViewProduct += (s, e) =>
                 {
-                    ViewProduct viewProduct = new ViewProduct(product, productService);
+                    ViewProduct viewProduct = new ViewProduct(product, productService, invoiceService);
                     viewProduct.Show();
                 };
             }
@@ -108,10 +111,12 @@ namespace ChozaGamer.Presentation
             if (existingLoginForm != null && !existingLoginForm.IsDisposed)
             {
                 existingLoginForm.Show();
+                UserSession.Logout();
             }
             else
             {
-                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService);
+                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService, invoiceService);
+                UserSession.Logout();
                 loginForm.Show();
             }
             this.Hide();

@@ -43,6 +43,16 @@ namespace ChozaGamer.Presentation
 
         private async void ConfirmButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(NameBar.Content))
+            {
+                MessageBox.Show("Please enter a name.");
+                return;
+            }
+            if (comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a category.");
+                return;
+            }
             try
             {
                 subcategory.idCategory = categories.Where(x => x.name == comboBox1.SelectedItem.ToString()).Select(x => x.id).FirstOrDefault();

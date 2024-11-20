@@ -2,6 +2,7 @@
 using ChozaGamer.DataAccess.Models.Domain;
 using ChozaGamer.DataAccess.Models.DTOs;
 using ChozaGamer.Presentation.UserControllers;
+using ChozaGamer.Presentation.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,13 @@ namespace ChozaGamer.Presentation
         private readonly BrandService brandService;
         private readonly CategoryService categoryService;
         private readonly SubCategoryService subCategoryService;
-
+        private readonly InvoiceService invoiceService;
         private List<SearchProductDTO> products;
         private List<BrandDTO> brands;
         private List<CategoryDTO> categories;
         private List<SubCategoryDTO> subCategories;
 
-        public AdminPanel(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService)
+        public AdminPanel(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService, InvoiceService invoiceService)
         {
             InitializeComponent();
             this.productService = productService;
@@ -31,7 +32,7 @@ namespace ChozaGamer.Presentation
             this.brandService = brandService;
             this.categoryService = categoryService;
             this.subCategoryService = subCategoryService;
-
+            this.invoiceService = invoiceService;
             LoadBrands();
             LoadProducts();
             LoadCategories();
@@ -321,10 +322,12 @@ namespace ChozaGamer.Presentation
             if (existingLoginForm != null && !existingLoginForm.IsDisposed)
             {
                 existingLoginForm.Show();
+                UserSession.Logout();
             }
             else
             {
-                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService);
+                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService, invoiceService);
+                UserSession.Logout();
                 loginForm.Show();
             }
             this.Hide();
@@ -332,43 +335,27 @@ namespace ChozaGamer.Presentation
 
         private async void ManageProductsButton_Click(object sender, EventArgs e)
         {
-            if (products == null || !products.Any())
-            {
-                await LoadProducts();
-            }
-
+            await LoadProducts();
             DisplayProducts(products);
         }
 
         private async void ManageBrandsButton_Click(object sender, EventArgs e)
         {
-            if (brands == null || !brands.Any())
-            {
-                await LoadBrands();
-            }
-
+            await LoadBrands();
             ItemsPanel.Show();
             DisplayBrands(brands);
         }
 
         private async void ManageCategoriesButton_Click(object sender, EventArgs e)
         {
-            if (categories == null || !categories.Any())
-            {
-                await LoadCategories();
-            }
-
+            await LoadCategories();
             ItemsPanel.Show();
             DisplayCategories(categories);
         }
 
         private async void ManagesSubcategoriesButton_Click(object sender, EventArgs e)
         {
-            if (subCategories == null || !subCategories.Any())
-            {
-                await LoadSubCategories();
-            }
-
+            await LoadSubCategories();
             ItemsPanel.Show();
             DisplaySubCategories(subCategories);
         }

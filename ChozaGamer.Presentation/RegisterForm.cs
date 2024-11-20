@@ -19,8 +19,9 @@ namespace ChozaGamer.Presentation
         private readonly BrandService brandService;
         private readonly CategoryService categoryService;
         private readonly SubCategoryService subCategoryService;
+        private readonly InvoiceService invoiceService;
 
-        public RegisterForm(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService)
+        public RegisterForm(ProductService productService, UserService userService, BrandService brandService, CategoryService categoryService, SubCategoryService subCategoryService, InvoiceService invoiceService)
         {
             InitializeComponent();
             this.productService = productService;
@@ -28,6 +29,7 @@ namespace ChozaGamer.Presentation
             this.brandService = brandService;
             this.categoryService = categoryService;
             this.subCategoryService = subCategoryService;
+            this.invoiceService = invoiceService;
         }
 
         private void MinimizeButton_Click(object sender, EventArgs e)
@@ -78,7 +80,7 @@ namespace ChozaGamer.Presentation
             }
             else
             {
-                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService);
+                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService, invoiceService);
                 loginForm.Show();
             }
             this.Hide();
@@ -94,7 +96,7 @@ namespace ChozaGamer.Presentation
             }
             else
             {
-                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService);
+                LoginForm loginForm = new LoginForm(productService, userService, brandService, categoryService, subCategoryService, invoiceService);
                 loginForm.Show();
             }
             this.Hide();

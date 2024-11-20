@@ -29,6 +29,7 @@ namespace ChozaGamer.DataAccess.Models.Domain
         public Category? Category { get; set; }
         public Brand? Brand { get; set; }
         public SubCategory? SubCategory { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
 
         public void ModifyStock(int quantity)
         {

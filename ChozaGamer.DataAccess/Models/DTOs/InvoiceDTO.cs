@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ChozaGamer.DataAccess.Models.DTOs
 {
-    public class UserDTO
+    public class InvoiceDTO
     {
-        public int id { get; set; }
-        public string username { get; set; }
-        public bool userType { get; set; }
+        public int idUser { get; set; }
+        public int idProduct { get; set; }
+        public DateTime date { get; set; }
     }
 }

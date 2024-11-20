@@ -26,6 +26,16 @@ namespace ChozaGamer.Presentation.UserControllers
 
         private async void ConfirmButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(NameBar.Content))
+            {
+                MessageBox.Show("Please enter a name.");
+                return;
+            }
+            if (numericUpDown1.Value == 0)
+            {
+                MessageBox.Show("Please enter a warranty.");
+                return;
+            }
             try
             {
                 brand.name = NameBar.Content;

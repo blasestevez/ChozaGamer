@@ -32,7 +32,6 @@
             Logo = new CuoreUI.Controls.cuiPictureBox();
             MinimizeButton = new CuoreUI.Controls.cuiButton();
             CloseButton = new CuoreUI.Controls.cuiButton();
-            ProductImage = new CuoreUI.Controls.cuiPictureBox();
             ProductName = new CuoreUI.Controls.cuiLabel();
             BrandLabel = new CuoreUI.Controls.cuiLabel();
             ProductBrand = new CuoreUI.Controls.cuiLabel();
@@ -48,7 +47,9 @@
             PriceLabel = new CuoreUI.Controls.cuiLabel();
             ProductPrice = new CuoreUI.Controls.cuiLabel();
             BuyButton = new CuoreUI.Controls.cuiButton();
+            ProductImage = new PictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ProductImage).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -144,18 +145,6 @@
             CloseButton.TextOffset = new Point(0, 0);
             CloseButton.Click += CloseButton_Click;
             // 
-            // ProductImage
-            // 
-            ProductImage.BackgroundImageLayout = ImageLayout.Stretch;
-            ProductImage.Content = null;
-            ProductImage.CornerRadius = 8;
-            ProductImage.ImageTint = Color.White;
-            ProductImage.Location = new Point(54, 168);
-            ProductImage.Margin = new Padding(4, 3, 4, 3);
-            ProductImage.Name = "ProductImage";
-            ProductImage.Size = new Size(388, 378);
-            ProductImage.TabIndex = 2;
-            // 
             // ProductName
             // 
             ProductName.Content = "aaa";
@@ -227,7 +216,7 @@
             ProductSubCategory.Content = "";
             ProductSubCategory.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             ProductSubCategory.HorizontalAlignment = CuoreUI.Controls.cuiLabel.HorizontalAlignments.Left;
-            ProductSubCategory.Location = new Point(628, 396);
+            ProductSubCategory.Location = new Point(632, 396);
             ProductSubCategory.Margin = new Padding(4, 3, 4, 3);
             ProductSubCategory.Name = "ProductSubCategory";
             ProductSubCategory.Size = new Size(648, 33);
@@ -343,11 +332,22 @@
             BuyButton.TextOffset = new Point(0, 0);
             BuyButton.Click += BuyButton_Click;
             // 
+            // ProductImage
+            // 
+            ProductImage.BackgroundImageLayout = ImageLayout.Center;
+            ProductImage.Location = new Point(64, 168);
+            ProductImage.Name = "ProductImage";
+            ProductImage.Size = new Size(401, 442);
+            ProductImage.SizeMode = PictureBoxSizeMode.StretchImage;
+            ProductImage.TabIndex = 18;
+            ProductImage.TabStop = false;
+            // 
             // ViewProduct
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1280, 720);
+            Controls.Add(ProductImage);
             Controls.Add(BuyButton);
             Controls.Add(ProductPrice);
             Controls.Add(PriceLabel);
@@ -363,12 +363,12 @@
             Controls.Add(ProductBrand);
             Controls.Add(BrandLabel);
             Controls.Add(ProductName);
-            Controls.Add(ProductImage);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ViewProduct";
             Text = "ViewProduct";
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)ProductImage).EndInit();
             ResumeLayout(false);
         }
 
@@ -378,7 +378,6 @@
         private CuoreUI.Controls.cuiPictureBox Logo;
         private CuoreUI.Controls.cuiButton MinimizeButton;
         private CuoreUI.Controls.cuiButton CloseButton;
-        private CuoreUI.Controls.cuiPictureBox ProductImage;
         private CuoreUI.Controls.cuiLabel ProductName;
         private CuoreUI.Controls.cuiLabel BrandLabel;
         private CuoreUI.Controls.cuiLabel ProductBrand;
@@ -394,5 +393,6 @@
         private CuoreUI.Controls.cuiLabel PriceLabel;
         private CuoreUI.Controls.cuiLabel ProductPrice;
         private CuoreUI.Controls.cuiButton BuyButton;
+        private PictureBox ProductImage;
     }
 }

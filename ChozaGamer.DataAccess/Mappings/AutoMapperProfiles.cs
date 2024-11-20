@@ -17,7 +17,8 @@ namespace ChozaGamer.DataAccess.Mappings
                 .ForMember(dest => dest.categoryName, opt => opt.MapFrom(src => src.Category.name))
                 .ForMember(dest => dest.brandName, opt => opt.MapFrom(src => src.Brand.name))
                 .ForMember(dest => dest.subCategoryName, opt => opt.MapFrom(src => src.SubCategory.name))
-                .ReverseMap();
+                .ReverseMap()
+                .ForMember(src => src.id, opt => opt.Ignore());
 
             CreateMap<LoginUserDTO, User>()
                 .ForMember(dest => dest.hashedPassword, opt => opt.Ignore());
@@ -43,6 +44,13 @@ namespace ChozaGamer.DataAccess.Mappings
                 .ForMember(dest => dest.Products, opt => opt.MapFrom(src => src.Products))
                 .ReverseMap();
 
+            CreateMap<Invoice, InvoiceDTO>()
+                .ForMember(dest => dest.date, opt => opt.MapFrom(src => src.date))
+                .ForMember(dest => dest.idProduct, opt => opt.MapFrom(src => src.idProduct))
+                .ForMember(dest => dest.idUser, opt => opt.MapFrom(src => src.idUser))
+                .ReverseMap()
+                .ForMember(dest => dest.Product, opt => opt.Ignore())
+                .ForMember(dest => dest.User, opt => opt.Ignore());
         }
     }
 }

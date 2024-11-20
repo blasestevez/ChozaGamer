@@ -15,6 +15,7 @@ namespace ChozaGamer.DataAccess
         public DbSet<Product> Products { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -46,6 +47,16 @@ namespace ChozaGamer.DataAccess
                 .WithMany(c => c.SubCategories)
                 .HasForeignKey(sc => sc.idCategory)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Invoice>()
+                .HasOne(i => i.Product)
+                .WithMany(p => p.Invoices)
+                .HasForeignKey(i => i.idProduct);
+
+            modelBuilder.Entity<Invoice>()
+                .HasOne(i => i.User)
+                .WithMany(u => u.Invoices)
+                .HasForeignKey(i => i.idUser);
 
             base.OnModelCreating(modelBuilder);
         }

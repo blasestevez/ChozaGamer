@@ -30,6 +30,11 @@ namespace ChozaGamer.Presentation
 
         private async void ConfirmButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(NameBar.Content))
+            {
+                MessageBox.Show("Please enter a name.");
+                return;
+            }
             try
             {
                 category.name = NameBar.Content;

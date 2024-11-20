@@ -35,6 +35,8 @@ namespace ChozaGamer.Presentation
             services.AddScoped<CategoryRepository>();
             services.AddScoped<SubCategoryService>();
             services.AddScoped<SubCategoryRepository>();
+            services.AddScoped<InvoiceService>();
+            services.AddScoped<InvoiceRepository>();
 
             services.AddSingleton<LoginForm>();
             var serviceProvider = services.BuildServiceProvider();

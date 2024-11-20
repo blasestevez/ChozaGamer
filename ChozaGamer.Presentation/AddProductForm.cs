@@ -110,6 +110,46 @@ namespace ChozaGamer.Presentation
 
         private async void ConfirmButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(NameBar.Content))
+            {
+                MessageBox.Show("Please enter a name.");
+                return;
+            }
+            if (string.IsNullOrEmpty(ProductDescriptionBar.Content))
+            {
+                MessageBox.Show("Please enter a description.");
+                return;
+            }
+            if (string.IsNullOrEmpty(ProductDefaultPriceBar.Content))
+            {
+                MessageBox.Show("Please enter a default price.");
+                return;
+            }
+            if (string.IsNullOrEmpty(ProductSpecialPriceBar.Content))
+            {
+                MessageBox.Show("Please enter a special price.");
+                return;
+            }
+            if (string.IsNullOrEmpty(ProductStockBar.Content))
+            {
+                MessageBox.Show("Please enter a stock.");
+                return;
+            }
+            if(string.IsNullOrEmpty(ProductCodeBar.Content))
+            {
+                MessageBox.Show("Please enter a product code.");
+                return;
+            }
+            if (string.IsNullOrEmpty(ProductIvaBar.Content))
+            {
+                MessageBox.Show("Please enter an IVA.");
+                return;
+            }
+            if (pictureBox1.Image == null)
+            {
+                MessageBox.Show("Please select an image.");
+                return;
+            }
             try
             {
                 product.name = NameBar.Content;

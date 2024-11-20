@@ -1,5 +1,6 @@
 ﻿using ChozaGamer.Business.Services;
 using ChozaGamer.DataAccess.Models.DTOs;
+using ChozaGamer.Presentation.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,18 +18,28 @@ namespace ChozaGamer.Presentation
     {
         private readonly SearchProductDTO productDTO;
         private readonly ProductService productService;
-
-        public ViewProduct(SearchProductDTO productDTO, ProductService productService)
+        private readonly InvoiceService invoiceService;
+        private InvoiceDTO invoice = new InvoiceDTO();
+        public ViewProduct(SearchProductDTO productDTO, ProductService productService, InvoiceService invoiceService)
         {
             InitializeComponent();
             this.productDTO = productDTO;
             this.productService = productService;
+            this.invoiceService = invoiceService;
             LoadProduct();
         }
 
         private void LoadProduct()
         {
-            //ProductImage.Content = ConvertByteToImage(productDTO.productImage);
+            var image = ConvertByteToImage(productDTO.productImage);
+            if (image != null)
+            {
+                ProductImage.Image = image;
+            }
+            else
+            {
+                Console.WriteLine("No se pudo cargar la imagen.");
+            }
             ProductName.Content = productDTO.name;
             ProductDescription.Content = productDTO.description;
             ProductBrand.Content = productDTO.brandName ?? "marca";
@@ -63,12 +74,6 @@ namespace ChozaGamer.Presentation
 
             try
             {
-                if (productImage.Length > 50 * 1024 * 1024) // Limitar tamaño (50 MB en este ejemplo)
-                {
-                    Console.WriteLine("La imagen es demasiado grande para cargarla.");
-                    return null;
-                }
-
                 using (MemoryStream memoryStream = new MemoryStream(productImage))
                 {
                     return Image.FromStream(memoryStream);
@@ -94,17 +99,31 @@ namespace ChozaGamer.Presentation
 
         private async void BuyButton_Click(object sender, EventArgs e)
         {
-            productDTO.stock -= 1;
-
-            var updateResponse = await productService.UpdateProduct(productDTO);
-
-            if (updateResponse)
+            if (productDTO.stock <= 0)
             {
-                MessageBox.Show("Product bought successfully.");
+                MessageBox.Show("Product out of stock.");
+                return;
             }
             else
             {
-                MessageBox.Show("Error buying product.");
+                productDTO.stock -= 1;
+
+                var updateResponse = await productService.UpdateProduct(productDTO);
+
+                if (updateResponse)
+                {
+                    MessageBox.Show("Product bought successfully.");
+                    invoice.idProduct = productDTO.id;
+                    invoice.idUser = UserSession.userId;
+                    invoice.date = DateTime.Now;
+                    await invoiceService.CreateInvoice(invoice);
+                    this.Dispose();
+                }
+                else
+                {
+                    MessageBox.Show("Error buying product.");
+                }
+
             }
         }
     }

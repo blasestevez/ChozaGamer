@@ -4,6 +4,7 @@ using ChozaGamer.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChozaGamer.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241119233253_AddedInvoice")]
+    partial class AddedInvoice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,6 +68,12 @@ namespace ChozaGamer.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int>("Productid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Userid")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("date")
                         .HasColumnType("datetime2");
 
@@ -76,9 +85,9 @@ namespace ChozaGamer.DataAccess.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("idProduct");
+                    b.HasIndex("Productid");
 
-                    b.HasIndex("idUser");
+                    b.HasIndex("Userid");
 
                     b.ToTable("Invoices");
                 });
@@ -190,14 +199,14 @@ namespace ChozaGamer.DataAccess.Migrations
             modelBuilder.Entity("ChozaGamer.DataAccess.Models.Domain.Invoice", b =>
                 {
                     b.HasOne("ChozaGamer.DataAccess.Models.Domain.Product", "Product")
-                        .WithMany("Invoices")
-                        .HasForeignKey("idProduct")
+                        .WithMany()
+                        .HasForeignKey("Productid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ChozaGamer.DataAccess.Models.Domain.User", "User")
-                        .WithMany("Invoices")
-                        .HasForeignKey("idUser")
+                        .WithMany()
+                        .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -252,19 +261,9 @@ namespace ChozaGamer.DataAccess.Migrations
                     b.Navigation("SubCategories");
                 });
 
-            modelBuilder.Entity("ChozaGamer.DataAccess.Models.Domain.Product", b =>
-                {
-                    b.Navigation("Invoices");
-                });
-
             modelBuilder.Entity("ChozaGamer.DataAccess.Models.Domain.SubCategory", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("ChozaGamer.DataAccess.Models.Domain.User", b =>
-                {
-                    b.Navigation("Invoices");
                 });
 #pragma warning restore 612, 618
         }

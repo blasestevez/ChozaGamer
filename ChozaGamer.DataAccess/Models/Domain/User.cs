@@ -12,5 +12,6 @@ namespace ChozaGamer.DataAccess.Models.Domain
         public string username { get; set; }
         public string hashedPassword { get; set; }
         public bool userType { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
     }
 }
