@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OverclockStore.Presentation", "ChozaGamer.Presentation\OverclockStore.Presentation.csproj", "{967086B6-7D10-4FC5-948C-16EDFE5A6A7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChozaGamer.Presentation", "ChozaGamer.Presentation\ChozaGamer.Presentation.csproj", "{967086B6-7D10-4FC5-948C-16EDFE5A6A7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OverclockStore.DataAccess", "ChozaGamer.DataAccess\OverclockStore.DataAccess.csproj", "{A9C854DD-AF7A-45A3-B1D7-20AB11FAB3EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChozaGamer.DataAccess", "ChozaGamer.DataAccess\ChozaGamer.DataAccess.csproj", "{A9C854DD-AF7A-45A3-B1D7-20AB11FAB3EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OverclockStore.Business", "ChozaGamer.Business\OverclockStore.Business.csproj", "{ABC687C8-9E91-421B-813C-95DE56178997}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChozaGamer.Business", "ChozaGamer.Business\ChozaGamer.Business.csproj", "{ABC687C8-9E91-421B-813C-95DE56178997}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

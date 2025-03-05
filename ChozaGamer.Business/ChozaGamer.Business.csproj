@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChozaGamer.DataAccess\OverclockStore.DataAccess.csproj" />
+    <ProjectReference Include="..\ChozaGamer.DataAccess\ChozaGamer.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
