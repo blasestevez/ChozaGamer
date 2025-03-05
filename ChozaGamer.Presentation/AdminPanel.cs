@@ -64,6 +64,7 @@ namespace ChozaGamer.Presentation
         private void DisplayProducts(List<SearchProductDTO> products)
         {
             ItemsPanel.Controls.Clear();
+
             if (products == null || !products.Any())
             {
                 Label noProductsLabel = new Label
@@ -73,30 +74,32 @@ namespace ChozaGamer.Presentation
                     TextAlign = ContentAlignment.MiddleCenter
                 };
                 ItemsPanel.Controls.Add(noProductsLabel);
-                return;
             }
-
-            foreach (var product in products)
+            else
             {
-                EditableProductCard selectableProductCard = new EditableProductCard(product);
-                selectableProductCard.Dock = DockStyle.Top;
-                selectableProductCard.Margin = new Padding(0, 0, 0, 10);
+                foreach (var product in products)
+                {
+                    EditableProductCard selectableProductCard = new EditableProductCard(product);
+                    selectableProductCard.Dock = DockStyle.Top;
+                    selectableProductCard.Margin = new Padding(0, 0, 0, 10);
 
-                selectableProductCard.DeleteButtonClicked += async (s, e) =>
-                {
-                    var response = await productService.DeleteProduct(product.id);
-                    if (response)
+                    selectableProductCard.DeleteButtonClicked += async (s, e) =>
                     {
-                        MessageBox.Show("Producto eliminado exitosamente.");
-                        LoadProducts();
-                    }
-                };
-                selectableProductCard.EditButtonClicked += (s, e) =>
-                {
-                    ManageProduct(product);
-                };
-                ItemsPanel.Controls.Add(selectableProductCard);
+                        var response = await productService.DeleteProduct(product.id);
+                        if (response)
+                        {
+                            MessageBox.Show("Producto eliminado exitosamente.");
+                            LoadProducts();
+                        }
+                    };
+                    selectableProductCard.EditButtonClicked += (s, e) =>
+                    {
+                        ManageProduct(product);
+                    };
+                    ItemsPanel.Controls.Add(selectableProductCard);
+                }
             }
+
             AddButton addButton = new AddButton();
             ItemsPanel.Controls.Add(addButton);
             addButton.OpenAddFormButtonClick += (s, e) =>
@@ -105,6 +108,7 @@ namespace ChozaGamer.Presentation
                 addProductForm.Show();
             };
         }
+
 
         private void DisplayBrands(List<BrandDTO> brands)
         {
@@ -119,30 +123,32 @@ namespace ChozaGamer.Presentation
                     TextAlign = ContentAlignment.MiddleCenter
                 };
                 ItemsPanel.Controls.Add(noBrandsLabel);
-                return;
             }
-
-            foreach (var brand in brands)
+            else
             {
-                EditableBrandCard selectableBrandCard = new EditableBrandCard(brand);
-                selectableBrandCard.Dock = DockStyle.Top;
-                selectableBrandCard.Margin = new Padding(0, 0, 0, 10);
+                foreach (var brand in brands)
+                {
+                    EditableBrandCard selectableBrandCard = new EditableBrandCard(brand);
+                    selectableBrandCard.Dock = DockStyle.Top;
+                    selectableBrandCard.Margin = new Padding(0, 0, 0, 10);
 
-                selectableBrandCard.DeleteButtonClicked += async (s, e) =>
-                {
-                    var response = await brandService.DeleteBrand(brand.id);
-                    if (response)
+                    selectableBrandCard.DeleteButtonClicked += async (s, e) =>
                     {
-                        MessageBox.Show("Marca eliminada exitosamente.");
-                        LoadBrands();
-                    }
-                };
-                selectableBrandCard.EditButtonClicked += (s, e) =>
-                {
-                    ManageBrand(brand);
-                };
-                ItemsPanel.Controls.Add(selectableBrandCard);
+                        var response = await brandService.DeleteBrand(brand.id);
+                        if (response)
+                        {
+                            MessageBox.Show("Marca eliminada exitosamente.");
+                            LoadBrands();
+                        }
+                    };
+                    selectableBrandCard.EditButtonClicked += (s, e) =>
+                    {
+                        ManageBrand(brand);
+                    };
+                    ItemsPanel.Controls.Add(selectableBrandCard);
+                }
             }
+
             AddButton addButton = new AddButton();
             ItemsPanel.Controls.Add(addButton);
             addButton.OpenAddFormButtonClick += (s, e) =>
@@ -165,30 +171,32 @@ namespace ChozaGamer.Presentation
                     TextAlign = ContentAlignment.MiddleCenter
                 };
                 ItemsPanel.Controls.Add(noCategoriesLabel);
-                return;
             }
-
-            foreach (var category in categories)
+            else
             {
-                EditableCategoryCard selectableCategoryCard = new EditableCategoryCard(category);
-                selectableCategoryCard.Dock = DockStyle.Top;
-                selectableCategoryCard.Margin = new Padding(0, 0, 0, 10);
+                foreach (var category in categories)
+                {
+                    EditableCategoryCard selectableCategoryCard = new EditableCategoryCard(category);
+                    selectableCategoryCard.Dock = DockStyle.Top;
+                    selectableCategoryCard.Margin = new Padding(0, 0, 0, 10);
 
-                selectableCategoryCard.DeleteButtonClicked += async (s, e) =>
-                {
-                    var response = await categoryService.DeleteCategory(category.id);
-                    if (response)
+                    selectableCategoryCard.DeleteButtonClicked += async (s, e) =>
                     {
-                        MessageBox.Show("Categoría eliminada exitosamente.");
-                        LoadCategories();
-                    }
-                };
-                selectableCategoryCard.EditButtonClicked += (s, e) =>
-                {
-                    ManageCategory(category);
-                };
-                ItemsPanel.Controls.Add(selectableCategoryCard);
+                        var response = await categoryService.DeleteCategory(category.id);
+                        if (response)
+                        {
+                            MessageBox.Show("Categoría eliminada exitosamente.");
+                            LoadCategories();
+                        }
+                    };
+                    selectableCategoryCard.EditButtonClicked += (s, e) =>
+                    {
+                        ManageCategory(category);
+                    };
+                    ItemsPanel.Controls.Add(selectableCategoryCard);
+                }
             }
+
             AddButton addButton = new AddButton();
             ItemsPanel.Controls.Add(addButton);
             addButton.OpenAddFormButtonClick += (s, e) =>
@@ -197,6 +205,9 @@ namespace ChozaGamer.Presentation
                 addCategoryForm.Show();
             };
         }
+
+
+
 
         private void DisplaySubCategories(List<SubCategoryDTO> subCategories)
         {
@@ -211,30 +222,32 @@ namespace ChozaGamer.Presentation
                     TextAlign = ContentAlignment.MiddleCenter
                 };
                 ItemsPanel.Controls.Add(noSubCategoriesLabel);
-                return;
             }
-
-            foreach (var subCategory in subCategories)
+            else
             {
-                EditableSubCategoryCard selectableSubCategoryCard = new EditableSubCategoryCard(subCategory);
-                selectableSubCategoryCard.Dock = DockStyle.Top;
-                selectableSubCategoryCard.Margin = new Padding(0, 0, 0, 10);
+                foreach (var subCategory in subCategories)
+                {
+                    EditableSubCategoryCard selectableSubCategoryCard = new EditableSubCategoryCard(subCategory);
+                    selectableSubCategoryCard.Dock = DockStyle.Top;
+                    selectableSubCategoryCard.Margin = new Padding(0, 0, 0, 10);
 
-                selectableSubCategoryCard.DeleteButtonClicked += async (s, e) =>
-                {
-                    var response = await subCategoryService.DeleteSubCategory(subCategory.id);
-                    if (response)
+                    selectableSubCategoryCard.DeleteButtonClicked += async (s, e) =>
                     {
-                        MessageBox.Show("Subcategoría eliminada exitosamente.");
-                        LoadSubCategories();
-                    }
-                };
-                selectableSubCategoryCard.EditButtonClicked += (s, e) =>
-                {
-                    ManageSubCategory(subCategory);
-                };
-                ItemsPanel.Controls.Add(selectableSubCategoryCard);
+                        var response = await subCategoryService.DeleteSubCategory(subCategory.id);
+                        if (response)
+                        {
+                            MessageBox.Show("Subcategoría eliminada exitosamente.");
+                            LoadSubCategories();
+                        }
+                    };
+                    selectableSubCategoryCard.EditButtonClicked += (s, e) =>
+                    {
+                        ManageSubCategory(subCategory);
+                    };
+                    ItemsPanel.Controls.Add(selectableSubCategoryCard);
+                }
             }
+
             AddButton addButton = new AddButton();
             ItemsPanel.Controls.Add(addButton);
             addButton.OpenAddFormButtonClick += (s, e) =>
@@ -243,6 +256,7 @@ namespace ChozaGamer.Presentation
                 addSubCategoryForm.Show();
             };
         }
+
 
         private void ManageBrand(BrandDTO brand)
         {
