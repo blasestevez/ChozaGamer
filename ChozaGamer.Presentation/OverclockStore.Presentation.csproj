@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ChozaGamer.Business\ChozaGamer.Business.csproj" />
-    <ProjectReference Include="..\ChozaGamer.DataAccess\ChozaGamer.DataAccess.csproj" />
+    <ProjectReference Include="..\ChozaGamer.Business\OverclockStore.Business.csproj" />
+    <ProjectReference Include="..\ChozaGamer.DataAccess\OverclockStore.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
