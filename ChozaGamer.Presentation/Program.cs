@@ -21,7 +21,7 @@ namespace ChozaGamer.Presentation
             var services = new ServiceCollection();
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer("Server=DESKTOP-JSV8JHV;Database=ChozaGamer;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true"));
+                options.UseSqlServer("Server=DESKTOP-F5J381A;Database=ChozaGamer;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True"));
             
             services.AddAutoMapper(typeof(AutoMapperProfiles));
 
